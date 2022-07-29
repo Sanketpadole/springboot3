@@ -15,6 +15,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.example.springboot2.Paging.Pagination;
 import com.example.springboot2.dao.CourseRepository;
@@ -56,11 +57,7 @@ public class CourseServiceImpl implements CourseService {
 
 
 
-@Override
-public void deleteCourse() {
-	// TODO Auto-generated method stub
-	
-}
+
 
 @Override
 public List<Course> getCourses(Integer pageNum, Integer pageSize) {
@@ -77,11 +74,6 @@ public List<Course> getCourses(Integer pageNum, Integer pageSize) {
 	}
 
 
-@Override
-public List<Course> getCourseList(){
-    return courseRepository.findAll();
-}
-
 
 @Override
 public List<Course> getCourseo() {
@@ -94,80 +86,75 @@ public List<Course> getCourseo() {
 
 	@Override
 	public ResponseEntity<?> getCourse(@PathVariable(value = "id") int courseId) {
-		 return new ResponseEntity<ErrorResponseDto>(new ErrorResponseDto("succes", "succes", courseRepository.findById(courseId).orElseThrow(() ->new ResourceNotFoundException("user not found with id:" +courseId))), HttpStatus.ACCEPTED);
+		 return new ResponseEntity<ErrorResponseDto>(new ErrorResponseDto("ErrorResponseDtosucces", "succes", courseRepository.findById(courseId).orElseThrow(() ->new ResourceNotFoundException("user not found with id:" +courseId))), HttpStatus.ACCEPTED);
 	}
 
 
-@Override
-public ResponseEntity<?> getCourseById(int courseId) {
-	// TODO Auto-generated method stub
-	return null;
-}
+	
 
-
-
-
-
-@Override
-public ResponseEntity<?> addCourse(int courseId) {
-	// TODO Auto-generated method stub
-	return null;
-}
-
-
-//@Override
-//public Course changePasswords(Course course, int id) {
-//	// TODO Auto-generated method stub
-//	{
-//
-//		Course course1 = courseRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("User Not Found"));
-//		this.courseRepository.save(course);
-//		return course;
-//}
-//}
-
-
-@Override
-public Course updateById(Course course, int courseId) throws ResourceNotFoundException {
-	// TODO Auto-generated method stub
-	return null;
-}
-
-
-@Override
-public Course updateco(Course course, int courseId) {
-	// TODO Auto-generated method stub
-	return null;
-}
-
-
-public ResponseEntity<Course> put(@RequestBody Course course,@PathVariable int courseId) {
-	Course c=this.courseRepository.findById(courseId).orElseThrow(() ->new ResourceNotFoundException("user not found"));
-//	this.courseRepository.save(course);
-//	return c;
+	@Override
+	public ResponseEntity<?> put(@PathVariable(value="id") int courseId, Course course) 
+	{
 		
-	 Course cour= this.courseRepository.save(c);
-
-	return new ResponseEntity<Course>(HttpStatus.ACCEPTED);
-}
-
-
-
-@Override
-public Course changePasswords(Course course, int id) {
-	// TODO Auto-generated method stub
-	return null;
-}
+		courseRepository.findById(courseId).orElseThrow(() ->new ResourceNotFoundException("user not found with id:" +courseId));
+		course.setId(courseId);
+//		Course co=courseRepository.save(course);
+		// TODO Auto-generated method stub
+		return new ResponseEntity<>(new ErrorResponseDto("succes", "succes", courseRepository.save(course)),HttpStatus.OK);
+	}
 
 
-//@Override
-//public Course updateco(Course course, int courseId) {
-//	Course c=this.courseRepository.findById(courseId).orElseThrow();
-//	
-//	c.setTitle(courseId.ge);
+	@Override
+	public ResponseEntity<?> put(Course course, int courseId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	@Override
+	public Course updateCourse(Course course, int courseId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 //
-//	return null;
-//}
+//	@Override
+//	public Course updateCourse(Course course, int courseId) {
+//		// TODO Auto-generated method stub
+//		course.setId(courseId);
+//		return courseRepository.save(course);
+//	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

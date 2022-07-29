@@ -46,15 +46,11 @@ import com.example.springboot2.exception.ResourceNotFoundException;
 public class MyController {
 	@Autowired
 	private CourseService courseService;
-	@Autowired
-	private CourseRepository courseRepository;
+
 
 	
 
-    @GetMapping("jj")
-    public List<Course> getCourse(){
-        return courseService.getCourseList();
-    }
+   
     
 
     
@@ -74,23 +70,20 @@ public class MyController {
     	return courseService.getCourse(courseId);
     }
     
-    
-    @PutMapping("/{id}")
-    public ResponseEntity<?>put(@RequestBody Course course,@PathVariable int courseId){
-    	return courseService.put(course, courseId);
-    }
-    
-    
-//    @PutMapping("/{courseId}")
-//    public ResponseEntity<?> updatethecourse(@RequestBody Course course,@PathVariable Integer courseId)
-//    {
-//    	
 //    
-//    	
-//    	
-//		return new ResponseEntity<>(c,HttpStatus.OK);
-//    
+//    @PutMapping("/{id}")
+//    public ResponseEntity<?>put(@PathVariable(value="id") int courseId,@RequestBody Course course){
+//    	return courseService.put(courseId,course);
 //    }
+    
+    
+   @PutMapping("/{id}")
+  public Course updateCourse(@PathVariable(value="id") int courseId,@RequestBody Course course) {
+  	return courseService.updateCourse(course, courseId);
+   }
+   
+
+
 
 
 		
@@ -121,19 +114,22 @@ public class MyController {
 	
 
 	
-//	
-//	@PutMapping("/{id}")
-//	public ResponseEntity<?> changePasswords(@RequestBody Course course,@PathVariable(value = "id") int courseId){
-//
-//		Course course2=this.courseService.updateById(course, courseId);
-//		return ResponseEntity.ok(course2);
-//
-//	}
+
 
 
 	
 	 @DeleteMapping("/{id}")
 	    public void deleteCourse(@PathVariable int id) {
 	    courseService.deleteCourse(id);
+	 }
+	 
+	 
+	 
+	 
+	 
+	
+	 public String hello() {
+		String text="this page is not accessible";
+		return text;
 	 }
 }
