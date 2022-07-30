@@ -17,7 +17,7 @@ public class Springboot2Application implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
-		System.out.println(this.passwordEncoder.encode("xyz"));
+		System.out.println(this.passwordEncoder.encode("sanket"));
 		
 	}
 

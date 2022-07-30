@@ -6,8 +6,8 @@ import com.example.springboot2.entities.Users;
 @Service
 public interface UsersService {
 
-	Users addUsers();
 
-	Users addUsers(Users users);
+
+	public Users addUsers(Users users);
 
 }
