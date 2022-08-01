@@ -6,14 +6,13 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Table;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 @Entity
-
 public class Users implements UserDetails   {
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer id;
@@ -26,6 +25,7 @@ public class Users implements UserDetails   {
 		super();
 		// TODO Auto-generated constructor stub
 	}
+
 	public Users(Integer id, String email, String password, String username) {
 		super();
 		this.id = id;

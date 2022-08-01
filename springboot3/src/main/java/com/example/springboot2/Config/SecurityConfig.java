@@ -33,11 +33,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		
 			csrf().disable()
 			.authorizeHttpRequests()
-			.antMatchers("/api/v1/auth/login","/users").permitAll()
+			.antMatchers("/api/v1/auth/login","/users").permitAll() 
 			.anyRequest()
 			.authenticated()
 			.and()
-			.exceptionHandling().authenticationEntryPoint(this.jwtAuthenticationEntryPoint)
+			.exceptionHandling().authenticationEntryPoint(this.jwtAuthenticationEntryPoint) 
 			.and()
 			.sessionManagement()
 			.sessionCreationPolicy(SessionCreationPolicy.STATELESS);
