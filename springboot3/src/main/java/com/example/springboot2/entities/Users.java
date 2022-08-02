@@ -29,7 +29,7 @@ public class Users implements UserDetails   {
 	public Users(Integer id, String email, String password, String username) {
 		super();
 		this.id = id;
-		this.email = email;
+		this.email = email;	
 		this.password = password;
 		this.username = username;
 	}
@@ -62,8 +62,8 @@ public class Users implements UserDetails   {
 	@Override
 	public String getUsername() {
 		// TODO Auto-generated method stub
-		return this.email;
-	}
+		return this.getEmail();
+	}	
 	@Override
 	public boolean isAccountNonExpired() {
 		// TODO Auto-generated method stub

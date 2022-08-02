@@ -101,7 +101,7 @@ public class MyController {
     {
 
 
-        return courseService.getCourses(pageNum,pageSize);
+        return courseService.getCourses(pageNum,pageSize);	
     }
 	
 	@PostMapping()
@@ -113,14 +113,14 @@ public class MyController {
 
 	
 
-	
+		
 
 
 
 	
 	 @DeleteMapping("/{id}")
 	    public void deleteCourse(@PathVariable int id) {
-	    courseService.deleteCourse(id);
+	    courseService.deleteCourse(id);	
 	 }
 	 
 	 

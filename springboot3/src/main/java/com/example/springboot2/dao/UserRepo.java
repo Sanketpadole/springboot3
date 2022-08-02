@@ -8,9 +8,9 @@ import org.springframework.stereotype.Repository;
 import com.example.springboot2.entities.Users;
 @Repository
 public interface UserRepo extends JpaRepository<Users,Integer>{
-	Optional<Users> findByEmail(String email);
+	Users findByEmail(String email);
 
-//	Object getPassword();
+
 	
 	Optional<Users> findByPassword(String password);
 }

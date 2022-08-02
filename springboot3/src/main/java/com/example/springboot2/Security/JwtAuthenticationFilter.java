@@ -30,7 +30,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter{
 		
 		
 //		get token
-		String requestToken=request.getHeader("Authorization");
+		String requestToken=request.getHeader("Authorization");	
 		
 //		Bearer 476987njik
 		
@@ -39,11 +39,11 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter{
 		String username=null;
 		String token=null;
 		
-		if(request!=null && requestToken.startsWith("Bearer"))
+		if(request!=null && requestToken.startsWith("Bearer "))
 		{
-			token=requestToken.substring(7);
-			try
-			{
+			token=requestToken.substring(7); 
+			try 
+			{		
 			username=this.jwtTokenHelper.getEmailFromToken(token);
 			}
 			catch(IllegalArgumentException e)
@@ -67,12 +67,17 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter{
 		
 		if(username!=null && SecurityContextHolder.getContext().getAuthentication()==null )
 		{	
+			
+			
 			UserDetails userDetails=this.userDetailsService.loadUserByUsername(username);
+			System.out.println("uyhiutyviytv  iytvgiyt  "+userDetails);
+			
+			
 			if(this.jwtTokenHelper.validateToken(token, userDetails))
 			{
 //				Authentication
 				
-				UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken= new UsernamePasswordAuthenticationToken(userDetails,null,userDetails.getAuthorities());
+				UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken= new UsernamePasswordAuthenticationToken(userDetails,token,null);
 				usernamePasswordAuthenticationToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
 				SecurityContextHolder.getContext().setAuthentication(usernamePasswordAuthenticationToken);
 			}else
@@ -89,6 +94,8 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter{
 			
 		}
 			
+		
+		
 		
 		
 		

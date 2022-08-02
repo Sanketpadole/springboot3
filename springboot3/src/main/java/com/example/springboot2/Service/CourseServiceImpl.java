@@ -96,7 +96,7 @@ public List<Course> getCourseo() {
 	public ResponseEntity<?> put(@PathVariable(value="id") int courseId, Course course) 
 	{
 		
-		courseRepository.findById(courseId).orElseThrow(() ->new ResourceNotFoundException("user not found with id:" +courseId));
+		courseRepository.findById(courseId).orElseThrow(() ->new ResourceNotFoundException("user not found with id:" +courseId));	
 		course.setId(courseId);
 //		Course co=courseRepository.save(course);
 		// TODO Auto-generated method stub
