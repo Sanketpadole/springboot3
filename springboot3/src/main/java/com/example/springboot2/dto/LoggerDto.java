@@ -60,4 +60,9 @@ public class LoggerDto {
 
 	}
 
+	public String getEmail() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

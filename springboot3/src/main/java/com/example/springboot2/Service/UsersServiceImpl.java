@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.example.springboot2.dao.UserRepo;
 
-import com.example.springboot2.entities.Course;
+
 import com.example.springboot2.entities.Users;
 @Service
 public class UsersServiceImpl implements UsersService{
@@ -20,7 +20,7 @@ public class UsersServiceImpl implements UsersService{
  
 	}
 	@Override
-	public Users addUsers(Users users) {	
+	public Users addUsers(Users users) {		
 		// TODO Auto-generated method stub
 		
 		

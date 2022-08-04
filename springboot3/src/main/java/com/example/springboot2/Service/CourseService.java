@@ -2,12 +2,12 @@ package com.example.springboot2.Service;
 
 import java.util.List;
 
-import org.springframework.data.domain.Page;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.example.springboot2.entities.Course;
-import com.example.springboot2.exception.ResourceNotFoundException;
+
 
 
 @Service

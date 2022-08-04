@@ -30,7 +30,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter{
 		
 		
 //		get token
-		String requestToken=request.getHeader("Authorization");	
+		String requestToken=request.getHeader("Authorization");			
 		
 //		Bearer 476987njik
 		
@@ -70,7 +70,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter{
 			
 			
 			UserDetails userDetails=this.userDetailsService.loadUserByUsername(username);
-			System.out.println("uyhiutyviytv  iytvgiyt  "+userDetails);
+//			System.out.println("uyhiutyviytv  iytvgiyt  "+userDetails);
 			
 			
 			if(this.jwtTokenHelper.validateToken(token, userDetails))

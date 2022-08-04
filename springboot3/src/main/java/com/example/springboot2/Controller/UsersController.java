@@ -14,19 +14,19 @@ import com.example.springboot2.entities.Course;
 import com.example.springboot2.entities.Users;
 
 @RestController
-@RequestMapping("/users")
+@RequestMapping("/register")
 public class UsersController {	
 	@Autowired
 	private UsersService usersService;
 	
 	@PostMapping
-	public Users getUsers(@RequestBody Users users)	
+	public Users getUsers(@RequestBody Users users)		
 	{
 		return usersService.addUsers(users);	
 		
 	}
 	
-	@GetMapping("/sanket")
+	@GetMapping("/users")
 	public List<Users> getCoursess() {
 		return this.usersService.getCoursess();
 	}

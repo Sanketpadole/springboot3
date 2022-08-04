@@ -23,25 +23,14 @@ public class CustomUserDetailService implements UserDetailsService {
 	@Autowired
 	private PasswordEncoder passwordEncoder;
 	@Override
-	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {	
+	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {		
 		// loading user from database by username
 	Users users	=this.userRepo.findByEmail(username);
-//	Users pass	=this.userRepo.findByPassword(password).orElseThrow(()->new ResourceNotFoundException("not found"));
-//	if(username.equals(users))
-//	{
+
 		
 		return users;	
-//	}else {
-//		throw new UsernameNotFoundException("User not found");
-//	}
-//	 @Override
-//		 public Users save(@RequestBody JwtAuthRequest request) {
-//		 Users newUser = new Users();
-//		 newUser.setEmail(request.getEmail());
-//		 newUser.setPassword(bcryptEncoder.encode(request.getPassword()));
-		 
-//		 return authRepository.save(newUser);
-		 }
+	}
+
 
 
 	

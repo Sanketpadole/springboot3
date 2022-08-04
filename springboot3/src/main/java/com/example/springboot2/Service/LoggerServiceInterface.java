@@ -9,6 +9,10 @@ public interface LoggerServiceInterface {
 
 	void createLogger(LoggerDto loggerDto, Users users);
 
+	void logoutUser(String token);
+
+
+
 	
 
 }

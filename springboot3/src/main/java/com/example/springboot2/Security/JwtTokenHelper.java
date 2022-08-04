@@ -1,4 +1,5 @@
 package com.example.springboot2.Security;
+
 import java.io.Serializable;
 import java.util.Date;
 import java.util.HashMap;
@@ -69,7 +70,7 @@ public class JwtTokenHelper implements Serializable {
 	// }
 
 	// generate token for user
-	public String generateToken(UserDetails userDetails) {
+	public String generateToken(Users userDetails) {
 
 		Map<String, Object> claims = new HashMap<>();
 		return doGenerateToken(claims, userDetails.toString());
@@ -92,7 +93,7 @@ public class JwtTokenHelper implements Serializable {
 	// compaction of the JWT to a URL-safe string
 	private String doGenerateToken(Map<String, Object> claims, String subject) {
 
-	 	return Jwts.builder().setClaims(claims).setSubject(subject).setIssuedAt(new Date(System.currentTimeMillis())).setExpiration(new Date(System.currentTimeMillis() + (JWT_TOKEN_VALIDITY * 1000))).signWith(SignatureAlgorithm.HS512, secret).compact();
+		return Jwts.builder().setClaims(claims).setSubject(subject).setIssuedAt(new Date(System.currentTimeMillis())).setExpiration(new Date(System.currentTimeMillis() + (JWT_TOKEN_VALIDITY * 1000))).signWith(SignatureAlgorithm.HS512, secret).compact();
 
 	}
 
@@ -105,7 +106,7 @@ public class JwtTokenHelper implements Serializable {
 	// validate token
 	public Boolean validateToken(String token, UserDetails userDetails) {
 
-		return !isTokenExpired(token);	
+		return !isTokenExpired(token);
 
 		// throw new ResourceNotFoundException("Timeout for this request");
 	}

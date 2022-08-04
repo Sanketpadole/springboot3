@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import com.example.springboot2.entities.Course;
+
 import com.example.springboot2.entities.Users;
 @Service
 public interface UsersService {

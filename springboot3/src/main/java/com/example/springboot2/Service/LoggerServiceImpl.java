@@ -1,8 +1,10 @@
 package com.example.springboot2.Service;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
+
 
 import com.example.springboot2.dao.LoggerDtoRepository;
 import com.example.springboot2.dto.LoggerDto;
@@ -26,6 +28,19 @@ public class LoggerServiceImpl implements LoggerServiceInterface {
 		loggerDtoRepository.save(logger);
 
 	}
+	
+		@Transactional
+		public void logoutUser(String token) {
+
+			final String userToken = token.substring(7);
+			
+			LoggerDtoRepository.removeByToken(userToken);
+		}
+
+
+
+
+	
 
 	
 }

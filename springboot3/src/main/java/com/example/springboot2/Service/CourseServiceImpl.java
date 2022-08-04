@@ -1,31 +1,27 @@
 package com.example.springboot2.Service;
 
-import java.awt.print.Pageable;
+
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Slice;
-import org.springframework.data.domain.Sort;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.example.springboot2.Paging.Pagination;
+
+
 import com.example.springboot2.dao.CourseRepository;
 import com.example.springboot2.dto.ErrorResponseDto;
-//
-//import com.example.springboot2.dao.CourseRepository;
-//import com.example.springboot2.dao.CourseRepository;
+
 import com.example.springboot2.entities.Course;
 import com.example.springboot2.exception.ResourceNotFoundException;
-//import com.example.springboot2.page.paginatina;
+
 
 
 

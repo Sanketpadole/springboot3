@@ -2,10 +2,14 @@ package com.example.springboot2.entities;
 
 import java.util.Collection;
 
+
+
 import javax.persistence.Entity;
+
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -19,19 +23,40 @@ public class Users implements UserDetails   {
 	private String email;
 	private String password;
 	private String username;
+
+
 	
+
+	
+
+	public Users(Integer id, String email, String password, String username) {
+		super();
+		this.id = id;
+		this.email = email;
+		this.password = password;
+		this.username = username;
+
+	}
+
+	@Override
+	public String toString() {
+		return "Users [id=" + id + ", email=" + email + ", password=" + password + ", username=" + username
+				+ ", userRole=" +  "]";
+	}
+
+
 
 	public Users() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public Users(Integer id, String email, String password, String username) {
+	public Users(Integer id, String email, String password) {
 		super();
 		this.id = id;
 		this.email = email;	
-		this.password = password;
-		this.username = username;
+		this.password = password;	
+		
 	}
 	public Integer getId() {
 		return id;
