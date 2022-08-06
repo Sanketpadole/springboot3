@@ -1,67 +1,171 @@
 package com.example.springboot2.entities;
 
+import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.SQLDelete;
+import org.hibernate.annotations.UpdateTimestamp;
+import org.hibernate.annotations.Where;
 
 @Entity
-public class RoleEntity{
+@SQLDelete(sql = "UPDATE roles SET is_active=false WHERE id=?")
+
+@Where(clause="is_active=true")
+@Table(name = "roles")
+public class RoleEntity implements Serializable {
+
+	/**
+	 *
+	 */
+	private static final long serialVersionUID = 1L;
+
+	public RoleEntity() {
+
+		
+	}
+
 	@Id
-	
-	private long id;
+	@Column(name = "id")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
+
+	@Column(name = "role_name")
 	private String roleName;
+
+	@Column(name = "description")
 	private String description;
+
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "pk.role", cascade = CascadeType.ALL)
 	private List<UserRoleEntity> userRole;
-	
-	public RoleEntity(long id, String roleName, String description, List<UserRoleEntity> userRole) {
-		super();
-		this.id = id;
-		this.roleName = roleName;
-		this.description = description;
-		this.userRole = userRole;
-	}
+
+
 	public List<UserRoleEntity> getUserRole() {
+
 		return userRole;
+
 	}
+
 	public void setUserRole(List<UserRoleEntity> userRole) {
+
 		this.userRole = userRole;
+
 	}
-	@Override
-	public String toString() {
-		return "RoleEntity [id=" + id + ", roleName=" + roleName + ", description=" + description + "]";
-	}
-	public RoleEntity() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
-	public RoleEntity(long id, String roleName, String description) {
+
+	@Column(name = "is_active")
+	private Boolean isActive = true;
+
+
+
+	public RoleEntity(Long id, String roleName, String description, List<UserRoleEntity> userRole, Boolean isActive,
+			Date createdAt, Date updatedAt) {
 		super();
 		this.id = id;
 		this.roleName = roleName;
 		this.description = description;
+		this.userRole = userRole;
+		this.isActive = isActive;
+		this.createdAt = createdAt;
+		this.updatedAt = updatedAt;
 	}
-	public long getId() {
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+
+	@Column(name = "created_at")
+	@CreationTimestamp
+	private Date createdAt;
+
+	@Column(name = "updated_at")
+	@UpdateTimestamp
+	private Date updatedAt;
+
+	public Long getId() {
+
 		return id;
+
 	}
-	public void setId(long id) {
+
+	public void setId(Long id) {
+
 		this.id = id;
+
 	}
+
 	public String getRoleName() {
+
 		return roleName;
+
 	}
+
 	public void setRoleName(String roleName) {
+
 		this.roleName = roleName;
+
 	}
+
 	public String getDescription() {
+
 		return description;
+
 	}
+
 	public void setDescription(String description) {
+
 		this.description = description;
+
 	}
-	
+
+	public Boolean getIsActive() {
+
+		return isActive;
+
+	}
+
+	public void setIsActive(Boolean isActive) {
+
+		this.isActive = isActive;
+
+	}
+
+
+
+	public Date getCreatedAt() {
+
+		return createdAt;
+
+	}
+
+	public void setCreatedAt(Date createdAt) {
+
+		this.createdAt = createdAt;
+
+	}
+
+	public Date getUpdatedAt() {
+
+		return updatedAt;
+
+	}
+
+	public void setUpdatedAt(Date updatedAt) {
+
+		this.updatedAt = updatedAt;
+
+	}
+
 }

@@ -1,15 +1,15 @@
 package com.example.springboot2.entities;
 
 import java.util.Collection;
+import java.util.List;
 
-
-
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-
+import javax.persistence.OneToMany;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -23,11 +23,30 @@ public class Users implements UserDetails   {
 	private String email;
 	private String password;
 	private String username;
-
-
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "pk.user", cascade = CascadeType.ALL)
+	private List<UserRoleEntity> userRole;
 	
 
 	
+
+	
+
+	public Users(Integer id, String email, String password, String username, List<UserRoleEntity> userRole) {
+		super();
+		this.id = id;
+		this.email = email;
+		this.password = password;
+		this.username = username;
+		this.userRole = userRole;
+	}
+
+	public List<UserRoleEntity> getUserRole() {
+		return userRole;
+	}
+
+	public void setUserRole(List<UserRoleEntity> userRole) {
+		this.userRole = userRole;
+	}
 
 	public Users(Integer id, String email, String password, String username) {
 		super();

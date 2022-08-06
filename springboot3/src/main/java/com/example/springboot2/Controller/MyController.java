@@ -70,11 +70,7 @@ public class MyController {
     	return courseService.getCourse(courseId);
     }
     
-//    
-//    @PutMapping("/{id}")
-//    public ResponseEntity<?>put(@PathVariable(value="id") int courseId,@RequestBody Course course){
-//    	return courseService.put(courseId,course);
-//    }
+
     
     
    @PutMapping("/{id}")
@@ -91,7 +87,7 @@ public class MyController {
 	
 
 	
-	@GetMapping("oo")
+	@GetMapping("/getcourses")
 	public List<Course> getCourseo() {
 		return this.courseService.getCourseo();
 	}

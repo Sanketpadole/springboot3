@@ -94,8 +94,7 @@ public List<Course> getCourseo() {
 		
 		courseRepository.findById(courseId).orElseThrow(() ->new ResourceNotFoundException("user not found with id:" +courseId));	
 		course.setId(courseId);
-//		Course co=courseRepository.save(course);
-		// TODO Auto-generated method stub
+
 		return new ResponseEntity<>(new ErrorResponseDto("succes", "succes", courseRepository.save(course)),HttpStatus.OK);
 	}
 
@@ -113,13 +112,7 @@ public List<Course> getCourseo() {
 		return null;
 	}
 
-//
-//	@Override
-//	public Course updateCourse(Course course, int courseId) {
-//		// TODO Auto-generated method stub
-//		course.setId(courseId);
-//		return courseRepository.save(course);
-//	}
+
 
 
 

@@ -46,9 +46,7 @@ package com.example.springboot2.entities;
 		public void setId(Long id) {
 			this.id = id;
 		}
-//		public String getEmail() {
-//			return email;
-//		}
+
 		public void setEmail(String email) {
 			this.email = email;
 		}
@@ -58,45 +56,7 @@ package com.example.springboot2.entities;
 		public void setPassword(String password) {
 			this.password = password;
 		}
-//		@Override
-//		public Collection<? extends GrantedAuthority> getAuthorities() {
-//			// TODO Auto-generated method stub	
-//			return null;
-//		}
-//		@Override
-//		public String getUsername() {
-//			// TODO Auto-generated method stub
-//			return this.email;
-//		}
-//		@Override
-//		public boolean isAccountNonExpired() {
-//			// TODO Auto-generated method stub
-//			return true;
-//		}
-//		@Override
-//		public boolean isAccountNonLocked() {
-//			// TODO Auto-generated method stub
-//			return true;
-//		}
-//		@Override
-//		public boolean isCredentialsNonExpired() {
-//			// TODO Auto-generated method stub
-//			return true;
-//		}
-//		@Override
-//		public boolean isEnabled() {
-//			// TODO Auto-generated method stub
-//			return true;
-//		}
-//		public String getEmail() {
-//			// TODO Auto-generated method stub
-//			return null;
-//		}
-//		@Override
-//		public Collection<? extends GrantedAuthority> getAuthorities() {
-//			// TODO Auto-generated method stub
-//			return null;
-//		}
+
 		
 		
 
