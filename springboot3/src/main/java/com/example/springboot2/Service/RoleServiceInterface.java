@@ -14,10 +14,10 @@ public interface RoleServiceInterface {
 
 	List<RoleEntity> getRoles();
 
-	RoleEntity updateRole(Long Id, RoleEntity roleEntity);
+	RoleEntity updateRole(Integer id, RoleEntity roleEntity);
 
-	void deleteRoll(Long id, RoleEntity roleEntity);
+	void deleteRoll(Integer id, RoleEntity roleEntity);
 
-	ResponseEntity<?> getRolesId(Long id);
+	ResponseEntity<?> getRolesId(Integer id);
 
 }

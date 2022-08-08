@@ -11,9 +11,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.CreationTimestamp;
@@ -41,42 +39,33 @@ public class RoleEntity implements Serializable {
 	@Id
 	@Column(name = "id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+	private Integer id;
 
 	@Column(name = "role_name")
 	private String roleName;
 
 	@Column(name = "description")
 	private String description;
-
+	
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "pk.role", cascade = CascadeType.ALL)
 	private List<UserRoleEntity> userRole;
 
 
-	public List<UserRoleEntity> getUserRole() {
 
-		return userRole;
-
-	}
-
-	public void setUserRole(List<UserRoleEntity> userRole) {
-
-		this.userRole = userRole;
-
-	}
+	
 
 	@Column(name = "is_active")
 	private Boolean isActive = true;
 
 
 
-	public RoleEntity(Long id, String roleName, String description, List<UserRoleEntity> userRole, Boolean isActive,
+	public RoleEntity(Integer id, String roleName, String description, List<UserRoleEntity> userRole, Boolean isActive,
 			Date createdAt, Date updatedAt) {
 		super();
 		this.id = id;
 		this.roleName = roleName;
 		this.description = description;
-		this.userRole = userRole;
+	
 		this.isActive = isActive;
 		this.createdAt = createdAt;
 		this.updatedAt = updatedAt;
@@ -94,13 +83,13 @@ public class RoleEntity implements Serializable {
 	@UpdateTimestamp
 	private Date updatedAt;
 
-	public Long getId() {
+	public Integer getId() {
 
 		return id;
 
 	}
 
-	public void setId(Long id) {
+	public void setId(Integer id) {
 
 		this.id = id;
 

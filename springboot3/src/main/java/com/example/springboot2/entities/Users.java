@@ -25,7 +25,7 @@ public class Users implements UserDetails   {
 	private String username;
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "pk.user", cascade = CascadeType.ALL)
 	private List<UserRoleEntity> userRole;
-	
+
 
 	
 
@@ -37,16 +37,10 @@ public class Users implements UserDetails   {
 		this.email = email;
 		this.password = password;
 		this.username = username;
-		this.userRole = userRole;
+		
 	}
 
-	public List<UserRoleEntity> getUserRole() {
-		return userRole;
-	}
 
-	public void setUserRole(List<UserRoleEntity> userRole) {
-		this.userRole = userRole;
-	}
 
 	public Users(Integer id, String email, String password, String username) {
 		super();

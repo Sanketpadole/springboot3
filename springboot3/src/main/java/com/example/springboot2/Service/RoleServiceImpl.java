@@ -30,22 +30,27 @@ public class RoleServiceImpl implements RoleServiceInterface {
 
 
 	@Override
-	public RoleEntity updateRole(Long Id, RoleEntity roleEntity) {
+	public RoleEntity updateRole(Integer Id, RoleEntity roleEntity) {
 		// TODO Auto-generated method stub
 		roleEntity.setId(Id);
 		return roleEntityRepository.save(roleEntity);
 	}
 
 	@Override
-	public void deleteRoll(Long id, RoleEntity roleEntity) {
+	public void deleteRoll(Integer id, RoleEntity roleEntity) {
 		// TODO Auto-generated method stub
 	roleEntityRepository.deleteById(id);;
 	}
 
 	@Override
-	public ResponseEntity<?> getRolesId(Long id) {
+	public ResponseEntity<?> getRolesId(Integer id) {
 		// TODO Auto-generated method stub
 		return new ResponseEntity<ErrorResponseDto>(new ErrorResponseDto("success","success",roleEntityRepository.findById(id).orElseThrow(() ->new ResourceNotFoundException("Roles not found with id:" +id))),HttpStatus.ACCEPTED);
+	}
+
+	public RoleEntity updateRole1(Integer Id, RoleEntity roleEntity) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }
