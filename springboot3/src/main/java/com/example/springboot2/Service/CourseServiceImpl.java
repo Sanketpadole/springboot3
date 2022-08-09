@@ -40,7 +40,6 @@ public class CourseServiceImpl implements CourseService {
 	public Course addCourse(Course course) {
 		// TODO Auto-generated method stub
 
-		
 		return courseRepository.save(course);
 		
 	}
@@ -55,8 +54,8 @@ public class CourseServiceImpl implements CourseService {
 
 
 
-@Override
-public List<Course> getCourses(Integer pageNum, Integer pageSize) {
+	@Override
+	public List<Course> getCourses(Integer pageNum, Integer pageSize) {
 	// TODO Auto-generated method stub
 	
 	    PageRequest pages= PageRequest.of(pageNum,pageSize);
@@ -71,8 +70,8 @@ public List<Course> getCourses(Integer pageNum, Integer pageSize) {
 
 
 
-@Override
-public List<Course> getCourseo() {
+	@Override
+	public List<Course> getCourseo() {
 	// TODO Auto-generated method stub
 	return courseRepository.findAll();
 }
@@ -100,17 +99,13 @@ public List<Course> getCourseo() {
 
 
 	@Override
-	public ResponseEntity<?> put(Course course, int courseId) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-
-	@Override
 	public Course updateCourse(Course course, int courseId) {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+
+
 
 
 

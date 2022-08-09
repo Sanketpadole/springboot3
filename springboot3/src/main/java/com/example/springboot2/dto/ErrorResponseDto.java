@@ -50,17 +50,7 @@ public ErrorResponseDto(String message, String msgkey, Object data) {
 }
 
 
-//	public String getMessage() {
 
-//		return message;
-
-//	}
-
-//	public void setMessage(String message) {
-//
-//		this.message = message;
-//
-//	}
 
 	public void setData(Object data) {
 		Data = data;

@@ -4,7 +4,7 @@ package com.example.springboot2.Controller;
 
 
 import java.util.Calendar;
-import java.util.Date;
+
 
 import javax.servlet.http.HttpServletRequest;
 import javax.transaction.Transactional;
@@ -14,7 +14,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.web.bind.annotation.GetMapping;
+
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
@@ -26,7 +26,7 @@ import com.example.springboot2.Security.CustomUserDetailService;
 import com.example.springboot2.Security.JwtAuthResponse;
 import com.example.springboot2.Security.JwtTokenHelper;
 import com.example.springboot2.Service.LoggerServiceImpl;
-import com.example.springboot2.Service.LoggerServiceInterface;
+
 import com.example.springboot2.dao.UserRepo;
 import com.example.springboot2.dto.ErrorResponseDto;
 import com.example.springboot2.dto.LoggerDto;

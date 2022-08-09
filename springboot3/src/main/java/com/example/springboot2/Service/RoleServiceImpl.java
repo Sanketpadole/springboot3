@@ -48,9 +48,6 @@ public class RoleServiceImpl implements RoleServiceInterface {
 		return new ResponseEntity<ErrorResponseDto>(new ErrorResponseDto("success","success",roleEntityRepository.findById(id).orElseThrow(() ->new ResourceNotFoundException("Roles not found with id:" +id))),HttpStatus.ACCEPTED);
 	}
 
-	public RoleEntity updateRole1(Integer Id, RoleEntity roleEntity) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+
 
 }

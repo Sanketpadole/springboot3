@@ -39,7 +39,7 @@ public class RoleEntity implements Serializable {
 	@Id
 	@Column(name = "id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer id;
+	private Integer Roleid;
 
 	@Column(name = "role_name")
 	private String roleName;
@@ -62,7 +62,7 @@ public class RoleEntity implements Serializable {
 	public RoleEntity(Integer id, String roleName, String description, List<UserRoleEntity> userRole, Boolean isActive,
 			Date createdAt, Date updatedAt) {
 		super();
-		this.id = id;
+		this.Roleid = id;
 		this.roleName = roleName;
 		this.description = description;
 	
@@ -85,13 +85,13 @@ public class RoleEntity implements Serializable {
 
 	public Integer getId() {
 
-		return id;
+		return Roleid;
 
 	}
 
 	public void setId(Integer id) {
 
-		this.id = id;
+		this.Roleid = id;
 
 	}
 

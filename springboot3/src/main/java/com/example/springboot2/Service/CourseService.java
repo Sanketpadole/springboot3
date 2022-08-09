@@ -14,23 +14,10 @@ import com.example.springboot2.entities.Course;
 public interface CourseService {
 	
 	
-	
-
-	
-	
-
-
-
-
-	
 	public void deleteCourse(int id);
 
 
 	public List<Course> getCourses(Integer pageNum, Integer pageSize);
-
-
-
-	
 
 	public List<Course> getCourseo();
 
@@ -40,25 +27,16 @@ public interface CourseService {
 
 
 
-	
-
-
-
-
-
-
-
 	public ResponseEntity<?> getCourse(int courseId);
 
 
-
-
-
-	public ResponseEntity<?> put(Course course, int courseId);
 
 
 	ResponseEntity<?> put(int courseId, Course course);
 
 
 	public Course updateCourse(Course course, int courseId);
+
+
+
 }

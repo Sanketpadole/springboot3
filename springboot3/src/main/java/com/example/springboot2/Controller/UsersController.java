@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.springboot2.Service.UsersService;
-import com.example.springboot2.entities.Course;
+
 import com.example.springboot2.entities.Users;
 
 @RestController

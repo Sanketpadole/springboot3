@@ -3,7 +3,7 @@ package com.example.springboot2.entities;
 
 	
 
-	import java.util.Collection;
+	
 
 	import javax.persistence.Entity;
 	import javax.persistence.GeneratedValue;

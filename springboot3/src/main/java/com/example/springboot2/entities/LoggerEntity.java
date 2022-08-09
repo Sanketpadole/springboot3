@@ -14,7 +14,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.CreationTimestamp;
-import org.springframework.security.core.userdetails.User;
+
 
 @Entity
 @Table(name = "logger")
