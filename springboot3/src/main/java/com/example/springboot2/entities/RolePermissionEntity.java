@@ -17,33 +17,45 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 @SuppressWarnings("serial")
 @Entity
-@Table(name = "user_role")
-@AssociationOverrides({ @AssociationOverride(name = "pk.user", joinColumns = @JoinColumn(name = "user_id")), @AssociationOverride(name = "pk.role", joinColumns = @JoinColumn(name = "role_id")) })
-public class UserRoleEntity implements java.io.Serializable {
+@Table(name = "role_permission")
+@AssociationOverrides({ @AssociationOverride(name = "pk.role", joinColumns = @JoinColumn(name = "role_id")), @AssociationOverride(name = "pk.permission", joinColumns = @JoinColumn(name = "permission_id")) })
+public class RolePermissionEntity implements java.io.Serializable {
 
 	/**
 	 *
 	 */
 	private static final long serialVersionUID = 1L;
 
-	private UserRoleId pk = new UserRoleId();
+	public RolePermissionEntity() {
+
+	}
+
+	public RolePermissionEntity(RolePermissionId pk, Boolean isActive, Date createdAt, Date updatedAt) {
+
+		super();
+		this.pk = pk;
+		this.isActive = isActive;
+		this.createdAt = createdAt;
+		this.updatedAt = updatedAt;
+
+	}
+
+	private RolePermissionId pk = new RolePermissionId();
 
 	private Boolean isActive = true;
-	@CreationTimestamp
-	@Column(name = "created_at")
+
 	private Date createdAt;
-	@UpdateTimestamp
-	@Column(name = "updated_at")
+
 	private Date updatedAt;
 
 	@EmbeddedId
-	public UserRoleId getPk() {
+	public RolePermissionId getPk() {
 
 		return pk;
 
 	}
 
-	public void setPk(UserRoleId pk) {
+	public void setPk(RolePermissionId pk) {
 
 		this.pk = pk;
 

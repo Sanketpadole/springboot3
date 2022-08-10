@@ -34,13 +34,14 @@ public class RoleEntityController {
 	
 	@PostMapping()
 	public ResponseEntity<?>addRole(@RequestBody RoleEntity roleEntity,HttpServletRequest request){
-		String name=roleEntity.getRoleName();
-		Users users=new Users();
-		users.getId();
-		roleEntity.setId(users.getId());
+//		String name=roleEntity.getRoleName();
+//		Users users=new Users();
+//		users.getId();
+//		roleEntity.setId(users.getId());
 //		return new ResponseEntity<>(HttpStatus.OK);
+		this.roleServiceInterface.addRole(roleEntity);
 		
-		return new ResponseEntity<>(new ErrorResponseDto("Success","Success",null),HttpStatus.CREATED);
+		return new ResponseEntity<>(new ErrorResponseDto("Success","Success",roleEntity),HttpStatus.CREATED);
 		
 	}
 			

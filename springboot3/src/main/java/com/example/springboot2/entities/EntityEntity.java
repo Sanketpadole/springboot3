@@ -2,108 +2,86 @@ package com.example.springboot2.entities;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.UpdateTimestamp;
-import org.hibernate.annotations.Where;
 
 @Entity
-@SQLDelete(sql = "UPDATE roles SET is_active=false WHERE id=?")
-
-@Where(clause="is_active=true")
-@Table(name = "roles")
-public class RoleEntity implements Serializable {
+@Table(name = "entities")
+public class EntityEntity implements Serializable {
 
 	/**
 	 *
 	 */
 	private static final long serialVersionUID = 1L;
 
-	public RoleEntity() {
+	public EntityEntity() {
 
-		
+		// TODO Auto-generated constructor stub
+	}
+
+	public EntityEntity(Long id, String entityName, String description, Boolean isActive, Date createdAt, Date updatedAt) {
+
+		super();
+		this.id = id;
+		this.entityName = entityName;
+		this.description = description;
+		this.isActive = isActive;
+		this.createdAt = createdAt;
+		this.updatedAt = updatedAt;
+
 	}
 
 	@Id
 	@Column(name = "id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer Roleid;
+	private Long id;
 
-	@Column(name = "role_name")
-	private String roleName;
+	@Column(name = "entity_name")
+	private String entityName;
 
 	@Column(name = "description")
 	private String description;
-	
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "pk.role", cascade = CascadeType.ALL)
-	private List<UserRoleEntity> userRole;
-
-
-
-	
 
 	@Column(name = "is_active")
 	private Boolean isActive = true;
 
-
-
-	public RoleEntity(Integer id, String roleName, String description, List<UserRoleEntity> userRole, Boolean isActive,
-			Date createdAt, Date updatedAt) {
-		super();
-		this.Roleid = id;
-		this.roleName = roleName;
-		this.description = description;
-	
-		this.isActive = isActive;
-		this.createdAt = createdAt;
-		this.updatedAt = updatedAt;
-	}
-
-	public static long getSerialversionuid() {
-		return serialVersionUID;
-	}
-	@CreationTimestamp
 	@Column(name = "created_at")
-	
+	@CreationTimestamp
 	private Date createdAt;
-	@UpdateTimestamp
+
 	@Column(name = "updated_at")
-	
+	@UpdateTimestamp
 	private Date updatedAt;
 
-	public Integer getId() {
+	public Long getId() {
 
-		return Roleid;
-
-	}
-
-	public void setId(Integer id) {
-
-		this.Roleid = id;
+		return id;
 
 	}
 
-	public String getRoleName() {
+	public void setId(Long id) {
 
-		return roleName;
+		this.id = id;
 
 	}
 
-	public void setRoleName(String roleName) {
+	public String getEntityName() {
 
-		this.roleName = roleName;
+		return entityName;
+
+	}
+
+	public void setEntityName(String entityName) {
+
+		this.entityName = entityName;
 
 	}
 
@@ -131,8 +109,6 @@ public class RoleEntity implements Serializable {
 
 	}
 
-
-
 	public Date getCreatedAt() {
 
 		return createdAt;
@@ -158,3 +134,4 @@ public class RoleEntity implements Serializable {
 	}
 
 }
+
