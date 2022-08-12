@@ -3,6 +3,7 @@ package com.example.springboot2.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -33,11 +34,9 @@ public class UserRoleEntityServiceImpl implements UserRoleEntityServiceInterface
 		
 		
 		try {
-		
+	
 
-		
-
-		RoleEntity roleEntity=new RoleEntity();
+	RoleEntity roleEntity=new RoleEntity();
 		RoleEntity roleEntity1=this.roleEntityRepository.findById(userRoleEntityDto.getRoleid()).orElseThrow(()-> new ResourceNotFoundException("Not Found Id"));
 		System.out.println(roleEntity1);
 		Users users=new Users();
@@ -73,13 +72,13 @@ public class UserRoleEntityServiceImpl implements UserRoleEntityServiceInterface
 			return ResponseEntity.ok(HttpStatus.BAD_REQUEST);
 		}
 		return new ResponseEntity<>(new ErrorResponseDto("Success", "Success", userRoleEntityDto),HttpStatus.ACCEPTED);
-//		return null;
+
 		
 		
 			
 		
 		
-//		return UserRoleEntityDto;
+//			UserRoleEntity.setId(userRoleEntityDto.getRoleid());
 
 		
 		    
@@ -95,56 +94,141 @@ public class UserRoleEntityServiceImpl implements UserRoleEntityServiceInterface
 	return role;
 	}
 
+
+		
+
+
+	
+
 	@Override
 	public ResponseEntity<?> adduserroless(UserRoleEntityDto userRoleEntityDto) {
-		try {
-		RoleEntity roleEntity=new RoleEntity();
-		RoleEntity roleEntity1=this.roleEntityRepository.findById(userRoleEntityDto.getRoleid()).orElseThrow(()-> new ResourceNotFoundException("Not Found Id"));
-		Users users=new Users();
-		Users users1=this.userRepo.findById(userRoleEntityDto.getId()).orElseThrow(()-> new ResourceNotFoundException("not found"));
-		if(users1!=null && roleEntity1!=null)
-		{
-			ArrayList<UserRoleEntity> userRoles=new ArrayList<>();
-			UserRoleEntity ure=new UserRoleEntity();
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+
+	@Override
+	public UserRoleEntity adduserrole(Integer Id, UserRoleEntityDto userroleEntityDto) {
+		Optional<UserRoleEntity> userroleEntityDto1=Optional.empty();
+		userroleEntityDto1=this.userRoleEntityRepository.findById(Id);
+
 		
-			UserRoleId userRoleId=new UserRoleId();
+//		UserRoleEntityDto userroleEntityDto1=new UserRoleEntityDto();
+		
+		
+		return userRoleEntityRepository.save(userroleEntityDto1);
+		
+//		
+//		RoleEntity roleEntity=new RoleEntity();
+//		Optional<RoleEntity> roleEntity1=this.roleEntityRepository.findById(Id);
+//		System.out.println(roleEntity1);
+//		Users users=new Users();
+//		Optional<Users> users1=this.userRepo.findById(Id);
+////		UserRoleEntity userRoleEntity1=this.userRoleEntityRepository.save(users);
+//		if(users1!=null && roleEntity1!=null)
+//		
+//			
+//			userroleEntityDto1.setId(Id);
+//			return userRoleEntityRepository.save(userroleEntityDto1);
 			
-			userRoleId.setRole(roleEntity1);
+			
+		
+//			ArrayList<UserRoleEntity> userRoles=new ArrayList<>();
+//			UserRoleEntity ure=new UserRoleEntity();
+//		
+//			UserRoleId userRoleId=new UserRoleId();
+//			userRoleId.se
+//			userRoleId.setRole(roleEntity1);
+	
 			
 			
 
-			ure.setPk(userRoleId);
-			userRoles.add(ure);
-			userRoleEntityRepository.saveAll(userRoles);
-		}
-		
-		else {
-			throw new ResourceNotFoundException("not found");
-			
-		}
-	}
-	
-	catch(Exception e){
-		System.out.println("invalid data");
-		return ResponseEntity.ok(HttpStatus.BAD_REQUEST);
-	}
-	return new ResponseEntity<>(new ErrorResponseDto("Success", "Success", userRoleEntityDto),HttpStatus.ACCEPTED);
+//			
 		
 		
-//		UserRoleEntity.setPk(userRoleEntityDto);
-//		return new ResponseEntity<ErrorResponseDto>(new ErrorResponseDto ("success","success",userRoleEntityRepository.save(userRoleEntityDto).orElseThrow(() ->new ResourceNotFoundException("user not found"))),HttpStatus.ACCEPTED);
-				
 		
-	
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+//		userroleEntityDto.setId(Id);
+//		return userRoleEntityRepository.save(userroleEntityDto);
 	}
 
 	@Override
-	public ResponseEntity<?> adduserroless() {
+	public ResponseEntity<?> adduserroless(Integer Id, UserRoleEntity userroleEntity) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
+	@Override
+	public ResponseEntity<?> adduserroless(Integer RoleId, UserRoleEntityDto userroleEntityDto) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public UserRoleEntity adduserroless() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ResponseEntity<?> adduserroless(Integer Id, Optional<UserRoleEntity> userroleEntityDto) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+}
+		
+//		UserRoleId uri=new UserRoleId() {
+//			uri
+//		}
+//		
+//	}
+//	}
+//		try {
+			
+
+			
+
+//			RoleEntity roleEntity=new RoleEntity();
+//				RoleEntity roleEntity1=this.roleEntityRepository.findById(userroleEntity.getRoleid()).orElseThrow(()-> new ResourceNotFoundException("Not Found Id"));
+//				System.out.println(roleEntity1);
+//				Users users=new Users();
+//				Users users1=this.userRepo.findById(userroleEntityDto.getId()).orElseThrow(()-> new ResourceNotFoundException("not found"));
+//				UserRoleEntity userRoleEntity1=this.userRoleEntityRepository.save(users);
+//				if(users1!=null && roleEntity1!=null)
+//				{
+//					ArrayList<UserRoleEntity> userRoles=new ArrayList<>();
+//					UserRoleEntity ure=new UserRoleEntity();
+//				
+//					UserRoleId userRoleId=new UserRoleId();
+//					userRoleId.setUser(users1);
+//					userRoleId.setRole(roleEntity1);
+					
+					
+				
+					
+//
+//	}
+//				else {
+//					throw new ResourceNotFoundException("not found");
+//					
+//				}
+//			}
+//			
+//			catch(Exception e){
+//				System.out.println("invalid data");
+//				return ResponseEntity.ok(HttpStatus.BAD_REQUEST);
+//			}
+//			return new ResponseEntity<>(new ErrorResponseDto("Success", "Success", userRoleEntityDto),HttpStatus.ACCEPTED);
+
 
 
 	
-}
