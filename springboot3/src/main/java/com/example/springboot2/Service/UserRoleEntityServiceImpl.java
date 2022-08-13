@@ -109,14 +109,15 @@ public class UserRoleEntityServiceImpl implements UserRoleEntityServiceInterface
 
 	@Override
 	public UserRoleEntity adduserrole(Integer Id, UserRoleEntityDto userroleEntityDto) {
-		Optional<UserRoleEntity> userroleEntityDto1=Optional.empty();
-		userroleEntityDto1=this.userRoleEntityRepository.findById(Id);
-
-		
-//		UserRoleEntityDto userroleEntityDto1=new UserRoleEntityDto();
-		
-		
-		return userRoleEntityRepository.save(userroleEntityDto1);
+		userRoleEntityRepository.save(null)
+//		
+//		
+//
+//		
+////		UserRoleEntityDto userroleEntityDto1=new UserRoleEntityDto();
+//		
+//		
+//		return userRoleEntityRepository.save(userroleEntityDto1);
 		
 //		
 //		RoleEntity roleEntity=new RoleEntity();
@@ -159,7 +160,39 @@ public class UserRoleEntityServiceImpl implements UserRoleEntityServiceInterface
 		
 //		userroleEntityDto.setId(Id);
 //		return userRoleEntityRepository.save(userroleEntityDto);
+	@Override
+	public RoleEntity updateRole(RoleDto roleData, Long id, Long updateBy) throws ResourceNotFoundException {
+
+		RoleEntity roleEntity = roleRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Role Not Found"));
+		roleEntity.setRoleName(roleData.getRoleName());
+		roleEntity.setDescription(roleData.getDescription());
+		roleEntity.setUpdatedBy(authRepository.getById(updateBy));
+		roleRepository.save(roleEntity);
+		return roleEntity;
+		
+		
+		
+		
+		
+		
+		userroleEntityDto1.setId(Id);
+		return userRoleEntityRepository.save(userroleEntityDto1);
+	
+	
+
+		ArrayList<UserRoleEntity> userRoles=new ArrayList<>();
+		UserRoleEntity ure=new UserRoleEntity();
+	
+		UserRoleId userRoleId=new UserRoleId();
+		userRoleId.se
+		userRoleId.setRole(roleEntity1);
+
 	}
+	
+	
+	
+	
+	
 
 	@Override
 	public ResponseEntity<?> adduserroless(Integer Id, UserRoleEntity userroleEntity) {
@@ -181,6 +214,12 @@ public class UserRoleEntityServiceImpl implements UserRoleEntityServiceInterface
 
 	@Override
 	public ResponseEntity<?> adduserroless(Integer Id, Optional<UserRoleEntity> userroleEntityDto) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public UserRoleEntity adduserrole(Integer Id, UserRoleEntityDto userroleEntityDto) {
 		// TODO Auto-generated method stub
 		return null;
 	}
