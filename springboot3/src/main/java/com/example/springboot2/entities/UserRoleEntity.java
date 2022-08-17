@@ -89,5 +89,6 @@ public class UserRoleEntity implements java.io.Serializable {
 		this.updatedAt = updatedAt;
 
 	}
+	
 
 }

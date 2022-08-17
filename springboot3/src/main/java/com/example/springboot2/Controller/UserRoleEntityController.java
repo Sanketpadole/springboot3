@@ -4,8 +4,9 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
+
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -15,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.springboot2.Service.UserRoleEntityServiceInterface;
 import com.example.springboot2.dto.UserRoleEntityDto;
-import com.example.springboot2.entities.RoleEntity;
+
 import com.example.springboot2.entities.UserRoleEntity;
 
 @RestController
@@ -40,13 +41,20 @@ public class UserRoleEntityController {
 	
 	
 	
-	@PutMapping("/{id}")
-	public UserRoleEntity adduserrole(@PathVariable Integer Id,@RequestBody UserRoleEntityDto userRoleEntityDto){
-		return userRoleEntityServiceInterface.adduserroless();
+//	@PutMapping
+//	public UserRoleEntity updateUserRole(@RequestBody UserRoleEntityDto userRoleEntityDto){
+//		return userRoleEntityServiceInterface.adduserroless();
+//		
+//	}
+	@PutMapping
+	public ResponseEntity<?> updateUserRole(@RequestBody UserRoleEntityDto userRoleEntityDto){
+		return userRoleEntityServiceInterface.update(userRoleEntityDto);
 		
 	}
-	}
 	
+}
+	
+
 	
 	
 	

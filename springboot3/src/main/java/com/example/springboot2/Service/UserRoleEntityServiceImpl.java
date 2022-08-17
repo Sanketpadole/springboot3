@@ -78,7 +78,7 @@ public class UserRoleEntityServiceImpl implements UserRoleEntityServiceInterface
 			
 		
 		
-//			UserRoleEntity.setId(userRoleEntityDto.getRoleid());
+
 
 		
 		    
@@ -99,96 +99,74 @@ public class UserRoleEntityServiceImpl implements UserRoleEntityServiceInterface
 
 
 	
-
-	@Override
-	public ResponseEntity<?> adduserroless(UserRoleEntityDto userRoleEntityDto) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	
-
-	@Override
-	public UserRoleEntity adduserrole(Integer Id, UserRoleEntityDto userroleEntityDto) {
-		userRoleEntityRepository.save(null)
-//		
-//		
 //
-//		
-////		UserRoleEntityDto userroleEntityDto1=new UserRoleEntityDto();
-//		
-//		
-//		return userRoleEntityRepository.save(userroleEntityDto1);
-		
-//		
-//		RoleEntity roleEntity=new RoleEntity();
-//		Optional<RoleEntity> roleEntity1=this.roleEntityRepository.findById(Id);
-//		System.out.println(roleEntity1);
-//		Users users=new Users();
-//		Optional<Users> users1=this.userRepo.findById(Id);
-////		UserRoleEntity userRoleEntity1=this.userRoleEntityRepository.save(users);
-//		if(users1!=null && roleEntity1!=null)
-//		
+//	@Override
+//	public ResponseEntity<?> updateUserRole(UserRoleEntityDto userRoleEntityDto) {
+//		try {
 //			
-//			userroleEntityDto1.setId(Id);
-//			return userRoleEntityRepository.save(userroleEntityDto1);
-			
-			
-		
+//
+//	 
+//		RoleEntity roleEntity=this.roleEntityRepository.findById(userRoleEntityDto.getRoleid()).orElseThrow(()-> new ResourceNotFoundException("Not Found Id"));
+//		 
+// 		Users users=this.userRepo.findById(userRoleEntityDto.getId()).orElseThrow(()-> new ResourceNotFoundException("not found"));
+////		UserRoleEntity userRoleEntity1=this.userRoleEntityRepository.save(users);
+//		if(users!=null && roleEntity!=null)
+//		{
 //			ArrayList<UserRoleEntity> userRoles=new ArrayList<>();
+//			
 //			UserRoleEntity ure=new UserRoleEntity();
 //		
 //			UserRoleId userRoleId=new UserRoleId();
-//			userRoleId.se
-//			userRoleId.setRole(roleEntity1);
-	
-			
-			
-
+//			userRoleId.setUser(users);
+//			userRoleId.setRole(roleEntity);
 //			
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-//		userroleEntityDto.setId(Id);
-//		return userRoleEntityRepository.save(userroleEntityDto);
-	@Override
-	public RoleEntity updateRole(RoleDto roleData, Long id, Long updateBy) throws ResourceNotFoundException {
-
-		RoleEntity roleEntity = roleRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Role Not Found"));
-		roleEntity.setRoleName(roleData.getRoleName());
-		roleEntity.setDescription(roleData.getDescription());
-		roleEntity.setUpdatedBy(authRepository.getById(updateBy));
-		roleRepository.save(roleEntity);
-		return roleEntity;
-		
-		
-		
-		
-		
-		
-		userroleEntityDto1.setId(Id);
-		return userRoleEntityRepository.save(userroleEntityDto1);
-	
+//			
+//
+//			ure.setPk(userRoleId);
+//			userRoles.add(ure);
+//			userRoleEntityRepository.updateUserRole(users.getId(), roleEntity.getId());
+//			
+//		
+//			
+//		}
+//			
+//			else {
+//				throw new ResourceNotFoundException("not found");
+//				
+//			}
+//		}
+//		
+//		catch(Exception e){
+//			System.out.println("invalid data");
+//			return ResponseEntity.ok(HttpStatus.BAD_REQUEST);
+//		}
+//		return new ResponseEntity<>(new ErrorResponseDto("Success", "Success", userRoleEntityDto),HttpStatus.ACCEPTED);
+//		
+//		
+//	}
 	
 
-		ArrayList<UserRoleEntity> userRoles=new ArrayList<>();
-		UserRoleEntity ure=new UserRoleEntity();
-	
-		UserRoleId userRoleId=new UserRoleId();
-		userRoleId.se
-		userRoleId.setRole(roleEntity1);
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 
-	}
-	
+
+		
+		
+		
+		
+		
+
 	
 	
 	
@@ -223,50 +201,74 @@ public class UserRoleEntityServiceImpl implements UserRoleEntityServiceInterface
 		// TODO Auto-generated method stub
 		return null;
 	}
-}
-		
-//		UserRoleId uri=new UserRoleId() {
-//			uri
-//		}
-//		
-//	}
-//	}
-//		try {
+
+	@Override
+	public ResponseEntity<?> adduserroless(UserRoleEntityDto userRoleEntityDto) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ResponseEntity<?> update(UserRoleEntityDto userRoleEntityDto) {
+		try {
 			
 
-			
-
-//			RoleEntity roleEntity=new RoleEntity();
-//				RoleEntity roleEntity1=this.roleEntityRepository.findById(userroleEntity.getRoleid()).orElseThrow(()-> new ResourceNotFoundException("Not Found Id"));
-//				System.out.println(roleEntity1);
-//				Users users=new Users();
-//				Users users1=this.userRepo.findById(userroleEntityDto.getId()).orElseThrow(()-> new ResourceNotFoundException("not found"));
-//				UserRoleEntity userRoleEntity1=this.userRoleEntityRepository.save(users);
-//				if(users1!=null && roleEntity1!=null)
-//				{
-//					ArrayList<UserRoleEntity> userRoles=new ArrayList<>();
-//					UserRoleEntity ure=new UserRoleEntity();
-//				
-//					UserRoleId userRoleId=new UserRoleId();
-//					userRoleId.setUser(users1);
-//					userRoleId.setRole(roleEntity1);
-					
-					
+			 
+			RoleEntity roleEntity=this.roleEntityRepository.findById(userRoleEntityDto.getRoleid()).orElseThrow(()-> new ResourceNotFoundException("Not Found Id"));
+			 
+	 		Users users=this.userRepo.findById(userRoleEntityDto.getId()).orElseThrow(()-> new ResourceNotFoundException("not found"));
+//			UserRoleEntity userRoleEntity1=this.userRoleEntityRepository.save(users);
+			if(users!=null && roleEntity!=null)
+			{
+				ArrayList<UserRoleEntity> userRoles=new ArrayList<>();
 				
-					
-//
-//	}
-//				else {
-//					throw new ResourceNotFoundException("not found");
-//					
-//				}
-//			}
+				UserRoleEntity ure=new UserRoleEntity();
+			
+				UserRoleId userRoleId=new UserRoleId();
+				userRoleId.setUser(users);
+				userRoleId.setRole(roleEntity);
+			
+				
 //			
-//			catch(Exception e){
-//				System.out.println("invalid data");
-//				return ResponseEntity.ok(HttpStatus.BAD_REQUEST);
-//			}
-//			return new ResponseEntity<>(new ErrorResponseDto("Success", "Success", userRoleEntityDto),HttpStatus.ACCEPTED);
+//				
+//				
+//
+				ure.setPk(userRoleId);
+				userRoles.add(ure);
+				UserRoleEntity userRoleEntity=new UserRoleEntity();
+				userRoleEntityRepository.updateUserRole(users.getId(), roleEntity.getId());
+//				userRoleEntityRepository.saveAll(userRoles);
+//				userRoleEntityRepository.save(userRoleEntity);
+				
+				
+			
+				
+			}
+				
+				else {
+					throw new ResourceNotFoundException("not found");
+					
+				}
+			}
+			
+			catch(Exception e){
+				System.out.println("invalid data");
+				return ResponseEntity.ok(HttpStatus.BAD_REQUEST);
+			}
+			return new ResponseEntity<>(new ErrorResponseDto("Success", "Success", userRoleEntityDto),HttpStatus.ACCEPTED);
+			
+			
+		}
+
+	@Override
+	public ResponseEntity<?> updateUserRole(UserRoleEntityDto userRoleEntityDto) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	}
+	
+
+		
 
 
 
