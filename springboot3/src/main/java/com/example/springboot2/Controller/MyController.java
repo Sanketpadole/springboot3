@@ -35,10 +35,10 @@ public class MyController {
 
 	
 	
-@GetMapping("/{id}")
-public ResponseEntity<?> getCourseById(@PathVariable(value = "id") int courseId) {
+	@GetMapping("/{id}")
+	public ResponseEntity<?> getCourseById(@PathVariable(value = "id") int courseId) {
     	
-    return courseService.getCourse(courseId);
+		return courseService.getCourse(courseId);
    }
     
 
@@ -46,7 +46,7 @@ public ResponseEntity<?> getCourseById(@PathVariable(value = "id") int courseId)
     
    @PutMapping("/{id}")
     public Course updateCourse(@PathVariable(value="id") int courseId,@RequestBody Course course) {
-  	return courseService.updateCourse(course, courseId);
+	   return courseService.updateCourse(course, courseId);
    }
    
    
@@ -60,18 +60,16 @@ public ResponseEntity<?> getCourseById(@PathVariable(value = "id") int courseId)
    
 	
 	@GetMapping
-    public List<Course> getCountries(@RequestParam(required = false,defaultValue = "1") Integer pageNum,@RequestParam(required = false,defaultValue = "5") Integer pageSize)
-    {
-
-
-        return courseService.getCourses(pageNum,pageSize);	
+     public List<Course> getCountries(@RequestParam(required = false,defaultValue = "1") Integer pageNum,@RequestParam(required = false,defaultValue = "5") Integer pageSize){
+    
+		return courseService.getCourses(pageNum,pageSize);	
     }
 	
 	
 	
 	@PostMapping()
-	public Course addCourse(@RequestBody Course course)
-	{
+	public Course addCourse(@RequestBody Course course) {
+	
 		return this.courseService.addCourse(course);
 	}
 	

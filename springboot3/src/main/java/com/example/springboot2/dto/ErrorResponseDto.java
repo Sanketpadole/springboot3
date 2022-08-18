@@ -13,7 +13,7 @@ public class ErrorResponseDto {
 	
 public ErrorResponseDto() {
 		super();
-		// TODO Auto-generated constructor stub
+		
 	}
 
 

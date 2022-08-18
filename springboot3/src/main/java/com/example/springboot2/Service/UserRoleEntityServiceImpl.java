@@ -3,7 +3,7 @@ package com.example.springboot2.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -41,7 +41,7 @@ public class UserRoleEntityServiceImpl implements UserRoleEntityServiceInterface
 		System.out.println(roleEntity1);
 		Users users=new Users();
 		Users users1=this.userRepo.findById(userRoleEntityDto.getId()).orElseThrow(()-> new ResourceNotFoundException("not found"));
-//		UserRoleEntity userRoleEntity1=this.userRoleEntityRepository.save(users);
+
 		if(users1!=null && roleEntity1!=null)
 		{
 			ArrayList<UserRoleEntity> userRoles=new ArrayList<>();
@@ -99,125 +99,19 @@ public class UserRoleEntityServiceImpl implements UserRoleEntityServiceInterface
 
 
 	
-//
-//	@Override
-//	public ResponseEntity<?> updateUserRole(UserRoleEntityDto userRoleEntityDto) {
-//		try {
-//			
-//
-//	 
-//		RoleEntity roleEntity=this.roleEntityRepository.findById(userRoleEntityDto.getRoleid()).orElseThrow(()-> new ResourceNotFoundException("Not Found Id"));
-//		 
-// 		Users users=this.userRepo.findById(userRoleEntityDto.getId()).orElseThrow(()-> new ResourceNotFoundException("not found"));
-////		UserRoleEntity userRoleEntity1=this.userRoleEntityRepository.save(users);
-//		if(users!=null && roleEntity!=null)
-//		{
-//			ArrayList<UserRoleEntity> userRoles=new ArrayList<>();
-//			
-//			UserRoleEntity ure=new UserRoleEntity();
-//		
-//			UserRoleId userRoleId=new UserRoleId();
-//			userRoleId.setUser(users);
-//			userRoleId.setRole(roleEntity);
-//			
-//			
-//
-//			ure.setPk(userRoleId);
-//			userRoles.add(ure);
-//			userRoleEntityRepository.updateUserRole(users.getId(), roleEntity.getId());
-//			
-//		
-//			
-//		}
-//			
-//			else {
-//				throw new ResourceNotFoundException("not found");
-//				
-//			}
-//		}
-//		
-//		catch(Exception e){
-//			System.out.println("invalid data");
-//			return ResponseEntity.ok(HttpStatus.BAD_REQUEST);
-//		}
-//		return new ResponseEntity<>(new ErrorResponseDto("Success", "Success", userRoleEntityDto),HttpStatus.ACCEPTED);
-//		
-//		
-//	}
-	
-
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
 
 
-		
-		
-		
-		
-		
-
-	
-	
-	
-	
 
 	@Override
-	public ResponseEntity<?> adduserroless(Integer Id, UserRoleEntity userroleEntity) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public ResponseEntity<?> adduserroless(Integer RoleId, UserRoleEntityDto userroleEntityDto) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public UserRoleEntity adduserroless() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public ResponseEntity<?> adduserroless(Integer Id, Optional<UserRoleEntity> userroleEntityDto) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public UserRoleEntity adduserrole(Integer Id, UserRoleEntityDto userroleEntityDto) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public ResponseEntity<?> adduserroless(UserRoleEntityDto userRoleEntityDto) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public ResponseEntity<?> update(UserRoleEntityDto userRoleEntityDto) {
-		try {
+	public void update(UserRoleEntityDto userRoleEntityDto) {
+		
 			
 
 			 
 			RoleEntity roleEntity=this.roleEntityRepository.findById(userRoleEntityDto.getRoleid()).orElseThrow(()-> new ResourceNotFoundException("Not Found Id"));
 			 
 	 		Users users=this.userRepo.findById(userRoleEntityDto.getId()).orElseThrow(()-> new ResourceNotFoundException("not found"));
-//			UserRoleEntity userRoleEntity1=this.userRoleEntityRepository.save(users);
+
 			if(users!=null && roleEntity!=null)
 			{
 				ArrayList<UserRoleEntity> userRoles=new ArrayList<>();
@@ -227,19 +121,12 @@ public class UserRoleEntityServiceImpl implements UserRoleEntityServiceInterface
 				UserRoleId userRoleId=new UserRoleId();
 				userRoleId.setUser(users);
 				userRoleId.setRole(roleEntity);
-			
 				
-//			
-//				
-//				
-//
+				
+
 				ure.setPk(userRoleId);
 				userRoles.add(ure);
-				UserRoleEntity userRoleEntity=new UserRoleEntity();
 				userRoleEntityRepository.updateUserRole(users.getId(), roleEntity.getId());
-//				userRoleEntityRepository.saveAll(userRoles);
-//				userRoleEntityRepository.save(userRoleEntity);
-				
 				
 			
 				
@@ -249,23 +136,76 @@ public class UserRoleEntityServiceImpl implements UserRoleEntityServiceInterface
 					throw new ResourceNotFoundException("not found");
 					
 				}
+			
 			}
-			
-			catch(Exception e){
-				System.out.println("invalid data");
-				return ResponseEntity.ok(HttpStatus.BAD_REQUEST);
-			}
-			return new ResponseEntity<>(new ErrorResponseDto("Success", "Success", userRoleEntityDto),HttpStatus.ACCEPTED);
-			
-			
-		}
 
 	@Override
-	public ResponseEntity<?> updateUserRole(UserRoleEntityDto userRoleEntityDto) {
-		// TODO Auto-generated method stub
-		return null;
+	public void delete(UserRoleEntityDto userRoleEntityDto) {
+			
+			 
+				RoleEntity roleEntity=this.roleEntityRepository.findById(userRoleEntityDto.getRoleid()).orElseThrow(()-> new ResourceNotFoundException("Not Found Id"));
+				 
+		 		Users users=this.userRepo.findById(userRoleEntityDto.getId()).orElseThrow(()-> new ResourceNotFoundException("not found"));
+//				UserRoleEntity userRoleEntity1=this.userRoleEntityRepository.save(users);
+				if(users!=null && roleEntity!=null)
+				{
+					ArrayList<UserRoleEntity> userRoles=new ArrayList<>();
+					
+					UserRoleEntity ure=new UserRoleEntity();
+				
+					UserRoleId userRoleId=new UserRoleId();
+					userRoleId.setUser(users);
+					userRoleId.setRole(roleEntity);
+					
+					
+
+					ure.setPk(userRoleId);
+					userRoles.add(ure);
+					userRoleEntityRepository.updateUserRole(users.getId(), roleEntity.getId());
+					
+				
+					
+				}
+					
+					else {
+						throw new ResourceNotFoundException("not found");
+						
+					}
+		
+		
 	}
+	
 	}
+
+	
+
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+
+
+		
+		
+		
+		
+		
+
+	
+	
+	
+	
+
+
 	
 
 		

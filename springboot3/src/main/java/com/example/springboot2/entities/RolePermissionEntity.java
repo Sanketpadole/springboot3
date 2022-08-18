@@ -1,19 +1,20 @@
 package com.example.springboot2.entities;
 
-
-
 import java.sql.Date;
 
 import javax.persistence.AssociationOverride;
 import javax.persistence.AssociationOverrides;
 import javax.persistence.Column;
-import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
 import javax.persistence.Table;
-
+import javax.persistence.JoinColumn;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
+
+
+
+import javax.persistence.EmbeddedId;
+
 
 @SuppressWarnings("serial")
 @Entity
@@ -102,4 +103,6 @@ public class RolePermissionEntity implements java.io.Serializable {
 
 	}
 
+
+	
 }

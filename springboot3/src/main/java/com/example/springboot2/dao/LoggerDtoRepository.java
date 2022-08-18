@@ -11,7 +11,7 @@ import com.example.springboot2.entities.LoggerEntity;
 public interface LoggerDtoRepository extends JpaRepository<LoggerEntity,Integer>{
 
 	static void removeByToken(String userToken) {
-		// TODO Auto-generated method stub
+		
 		
 	}
 

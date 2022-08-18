@@ -24,7 +24,7 @@ public class LoggerEntity implements Serializable {
 
 	public LoggerEntity() {
 
-		// TODO Auto-generated constructor stub
+		
 	}
 
 	

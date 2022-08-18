@@ -20,26 +20,12 @@ ResponseEntity<?> addUserRoleEntity(UserRoleEntityDto userRoleEntityDto);
 
 List<UserRoleEntity> getuserrolls();
 
-UserRoleEntity adduserroless();
 
-ResponseEntity<?> adduserroless(UserRoleEntityDto userRoleEntityDto);
+void update(UserRoleEntityDto userRoleEntityDto);
 
-ResponseEntity<?> adduserroless(Integer RoleId, UserRoleEntityDto userroleEntityDto);
+void delete(UserRoleEntityDto userRoleEntityDto);
 
-ResponseEntity<?> adduserroless(Integer Id, UserRoleEntity userroleEntity);
 
-ResponseEntity<?> adduserroless(Integer Id, Optional<UserRoleEntity> userroleEntityDto);
-
-UserRoleEntity adduserrole(Integer Id, UserRoleEntityDto userroleEntityDto);
-//public ResponseEntity<?> addUserRoleEntity(UserRoleEntityDto userRoleEntityDto);
-
-ResponseEntity<?> updateUserRole(UserRoleEntityDto userRoleEntityDto);
-
-ResponseEntity<?> update(UserRoleEntityDto userRoleEntityDto);
-
-//ResponseEntity<?> updateUserRole(UserRoleEntityDto userRoleEntityDto);
-
-//UserRoleEntity adduserroless();
 
 
 

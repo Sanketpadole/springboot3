@@ -21,7 +21,7 @@ public class UsersServiceImpl implements UsersService{
 	}
 	@Override
 	public Users addUsers(Users users) {		
-		// TODO Auto-generated method stub
+		
 		
 		
 		String password=passwordEncoder.encode(users.getPassword());	
@@ -33,7 +33,7 @@ public class UsersServiceImpl implements UsersService{
 	}
 	@Override
 	public List<Users> getCoursess() {
-		// TODO Auto-generated method stub
+		
 		return userRepo.findAll();
 	}
 

@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import org.springframework.web.bind.annotation.PostMapping;
@@ -41,15 +41,15 @@ public class UserRoleEntityController {
 	
 	
 	
-//	@PutMapping
-//	public UserRoleEntity updateUserRole(@RequestBody UserRoleEntityDto userRoleEntityDto){
-//		return userRoleEntityServiceInterface.adduserroless();
-//		
-//	}
+
 	@PutMapping
-	public ResponseEntity<?> updateUserRole(@RequestBody UserRoleEntityDto userRoleEntityDto){
-		return userRoleEntityServiceInterface.update(userRoleEntityDto);
+	public void  updateUserRole(@RequestBody UserRoleEntityDto userRoleEntityDto){
+		 userRoleEntityServiceInterface.update(userRoleEntityDto);
 		
+	}
+	@DeleteMapping
+	public void Delete(@RequestBody UserRoleEntityDto userRoleEntityDto) {
+		userRoleEntityServiceInterface.delete(userRoleEntityDto);
 	}
 	
 }

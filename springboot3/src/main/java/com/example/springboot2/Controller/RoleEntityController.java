@@ -21,7 +21,7 @@ import com.example.springboot2.Service.RoleServiceInterface;
 import com.example.springboot2.dao.RoleEntityRepository;
 import com.example.springboot2.dto.ErrorResponseDto;
 import com.example.springboot2.entities.RoleEntity;
-import com.example.springboot2.entities.Users;
+
 
 @RestController
 @RequestMapping("/addRole")
@@ -34,11 +34,7 @@ public class RoleEntityController {
 	
 	@PostMapping()
 	public ResponseEntity<?>addRole(@RequestBody RoleEntity roleEntity,HttpServletRequest request){
-//		String name=roleEntity.getRoleName();
-//		Users users=new Users();
-//		users.getId();
-//		roleEntity.setId(users.getId());
-//		return new ResponseEntity<>(HttpStatus.OK);
+
 		this.roleServiceInterface.addRole(roleEntity);
 		
 		return new ResponseEntity<>(new ErrorResponseDto("Success","Success",roleEntity),HttpStatus.CREATED);

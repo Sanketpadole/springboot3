@@ -24,7 +24,7 @@ public class EntityEntity implements Serializable {
 
 	public EntityEntity() {
 
-		// TODO Auto-generated constructor stub
+		
 	}
 
 	public EntityEntity(Long id, String entityName, String description, Boolean isActive, Date createdAt, Date updatedAt) {

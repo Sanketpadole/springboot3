@@ -6,7 +6,7 @@ public class LoggerDto {
 
 	public LoggerDto() {
 
-		// TODO Auto-generated constructor stub
+		
 	}
 
 	public LoggerDto(String token, Long userId, Date expireAt) {
@@ -61,7 +61,7 @@ public class LoggerDto {
 	}
 
 	public String getEmail() {
-		// TODO Auto-generated method stub
+		
 		return null;
 	}
 

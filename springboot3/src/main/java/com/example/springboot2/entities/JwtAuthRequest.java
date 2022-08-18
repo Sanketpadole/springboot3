@@ -22,7 +22,7 @@ package com.example.springboot2.entities;
 		
 		public JwtAuthRequest() {
 			super();
-			// TODO Auto-generated constructor stub
+			
 		}
 		public JwtAuthRequest(Long id, String email, String password, String username) {
 			super();

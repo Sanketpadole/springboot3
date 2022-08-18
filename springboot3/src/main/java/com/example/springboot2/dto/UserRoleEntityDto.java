@@ -22,7 +22,7 @@ public UserRoleEntityDto(Integer id, Integer roleid) {
 }
 public UserRoleEntityDto() {
 	super();
-	// TODO Auto-generated constructor stub
+	
 }
 @Override
 public String toString() {
