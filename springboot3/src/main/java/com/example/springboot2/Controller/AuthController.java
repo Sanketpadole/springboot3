@@ -49,6 +49,7 @@ public class AuthController {
 	
 	@Autowired
 	private UserRepo userRepo;
+	
 	@Autowired
 	private LoggerServiceImpl loggerServiceImpl;
 	
@@ -78,7 +79,7 @@ public class AuthController {
 
 		
 			
-//			System.out.println("DATa"+users.getEmail());
+
 			
 			this.customUserDetailService.loadUserByUsername(authenticationRequest.getUsername());
 			

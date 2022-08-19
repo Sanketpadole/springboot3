@@ -46,30 +46,6 @@ public class PermissionServiceImpl implements PermissionServiceInterface {
 		return;
 	}
 
-
-
-	@Override
-	public ResponseEntity<?> updatepermission(PermissionRequestDto permissionBody) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-
-
-	@Override
-	public PermissionEntity updatethepermission(PermissionRequestDto permissionBody) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-
-
-	@Override
-	public PermissionEntity updatethepermission() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	
 	
 	
 	

@@ -9,15 +9,17 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import javax.persistence.JoinColumn;
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.UpdateTimestamp;
-
-
+import org.hibernate.annotations.Where;
 
 import javax.persistence.EmbeddedId;
 
 
 @SuppressWarnings("serial")
 @Entity
+@Where(clause="is_active=true")
+@SQLDelete(sql = "UPDATE role_permission SET is_active=false WHERE role_id=? AND permission_id=?")
 @Table(name = "role_permission")
 @AssociationOverrides({ @AssociationOverride(name = "pk.role", joinColumns = @JoinColumn(name = "role_id")), @AssociationOverride(name = "pk.permission", joinColumns = @JoinColumn(name = "permission_id")) })
 public class RolePermissionEntity implements java.io.Serializable {

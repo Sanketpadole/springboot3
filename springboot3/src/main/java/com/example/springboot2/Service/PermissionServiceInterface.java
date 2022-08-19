@@ -12,12 +12,12 @@ public interface PermissionServiceInterface {
 
 	ResponseEntity<?> addPermission(PermissionRequestDto permissionBody);
 
-	ResponseEntity<?> updatepermission(PermissionRequestDto permissionBody);
+	
 
 	
-	PermissionEntity updatethepermission(PermissionRequestDto permissionBody);
+	
 
-	PermissionEntity updatethepermission();
+
 
 	void editPermission(PermissionRequestDto permissionBody, Integer permissionId);
 

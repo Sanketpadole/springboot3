@@ -27,5 +27,15 @@ public interface UserRoleEntityRepository extends JpaRepository<UserRoleEntity,I
 	@Modifying(clearAutomatically=true)
 	@Query(value = "UPDATE user_role u SET role_id=:role_id WHERE u.user_id=:user_id",nativeQuery=true)
 	void updateUserRole(@Param("user_id") int user_id,@Param("role_id") int role_id);
+	
+	
+	
+	
+	
+	
+	@Transactional
+	@Modifying(clearAutomatically=true)
+	@Query(value = "DELETE user_role u SET role_id=:role_id WHERE u.user_id=:user_id",nativeQuery=true)
+	void deleteUserRole(@Param("user_id") int user_id,@Param("role_id") int role_id);
 
 }

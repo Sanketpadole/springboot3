@@ -73,19 +73,13 @@ public class UserRoleEntityServiceImpl implements UserRoleEntityServiceInterface
 		}
 		return new ResponseEntity<>(new ErrorResponseDto("Success", "Success", userRoleEntityDto),HttpStatus.ACCEPTED);
 
-		
-		
-			
-		
-		
+		}
 
-
-		
-		    
-				
-					
-}
-
+	
+	
+	
+	
+	
 	@Override
 	public List<UserRoleEntity> getuserrolls() {
 		
@@ -127,6 +121,7 @@ public class UserRoleEntityServiceImpl implements UserRoleEntityServiceInterface
 				ure.setPk(userRoleId);
 				userRoles.add(ure);
 				userRoleEntityRepository.updateUserRole(users.getId(), roleEntity.getId());
+				System.out.println("done");
 				
 			
 				
@@ -139,6 +134,10 @@ public class UserRoleEntityServiceImpl implements UserRoleEntityServiceInterface
 			
 			}
 
+	
+	
+	
+	
 	@Override
 	public void delete(UserRoleEntityDto userRoleEntityDto) {
 			
@@ -146,7 +145,7 @@ public class UserRoleEntityServiceImpl implements UserRoleEntityServiceInterface
 				RoleEntity roleEntity=this.roleEntityRepository.findById(userRoleEntityDto.getRoleid()).orElseThrow(()-> new ResourceNotFoundException("Not Found Id"));
 				 
 		 		Users users=this.userRepo.findById(userRoleEntityDto.getId()).orElseThrow(()-> new ResourceNotFoundException("not found"));
-//				UserRoleEntity userRoleEntity1=this.userRoleEntityRepository.save(users);
+
 				if(users!=null && roleEntity!=null)
 				{
 					ArrayList<UserRoleEntity> userRoles=new ArrayList<>();
@@ -161,7 +160,10 @@ public class UserRoleEntityServiceImpl implements UserRoleEntityServiceInterface
 
 					ure.setPk(userRoleId);
 					userRoles.add(ure);
-					userRoleEntityRepository.updateUserRole(users.getId(), roleEntity.getId());
+					
+					userRoleEntityRepository.delete(ure);
+					
+				
 					
 				
 					

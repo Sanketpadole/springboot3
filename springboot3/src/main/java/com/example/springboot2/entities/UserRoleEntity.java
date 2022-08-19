@@ -13,10 +13,14 @@ import javax.persistence.JoinColumn;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.UpdateTimestamp;
+import org.hibernate.annotations.Where;
 
 @SuppressWarnings("serial")
 @Entity
+@SQLDelete(sql = "UPDATE user_role SET is_active=false WHERE user_id=? AND role_id=?")
+@Where(clause="is_active=true")
 @Table(name = "user_role")
 @AssociationOverrides({ @AssociationOverride(name = "pk.user", joinColumns = @JoinColumn(name = "user_id")), @AssociationOverride(name = "pk.role", joinColumns = @JoinColumn(name = "role_id")) })
 public class UserRoleEntity implements java.io.Serializable {

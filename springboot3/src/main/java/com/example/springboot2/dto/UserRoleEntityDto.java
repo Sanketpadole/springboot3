@@ -1,5 +1,8 @@
 package com.example.springboot2.dto;
 
+import javax.persistence.Entity;
+
+
 public class UserRoleEntityDto {
 private Integer id;
 private Integer Roleid;
