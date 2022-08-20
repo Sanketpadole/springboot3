@@ -12,8 +12,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import com.example.springboot2.dao.PermissionRepository;
 import com.example.springboot2.dao.RoleEntityRepository;
 import com.example.springboot2.dao.RolePermissionRepository;
+import com.example.springboot2.dao.UserRoleEntityRepository;
 import com.example.springboot2.dto.ErrorResponseDto;
 import com.example.springboot2.dto.PermissionRequestDto;
+import com.example.springboot2.dto.RoleIdList;
 import com.example.springboot2.dto.RolePermissionDto;
 import com.example.springboot2.dto.UserRoleEntityDto;
 import com.example.springboot2.entities.PermissionEntity;
@@ -34,6 +36,8 @@ public class RolePermissionServiceImpl implements RolePermissionInterface {
 	private PermissionRepository permissionRepository;
 	@Autowired
 	private RolePermissionRepository rolePermissionRepository;
+	@Autowired
+	private UserRoleEntityRepository userRoleEntityRepository;
 	
 
 	
@@ -254,7 +258,46 @@ public class RolePermissionServiceImpl implements RolePermissionInterface {
 
 
 
-	
+	@Override
+	public ArrayList<String> getPermissionByUserId(Integer Id) {
+
+		ArrayList<RoleIdList> roleIds = userRoleEntityRepository.findByPkUserId(Id, RoleIdList.class);
+		ArrayList<Long> roles = new ArrayList<>();
+
+		for (int i = 0; i < roleIds.size(); i++) {
+
+			roles.add(roleIds.get(i).getPkRoleId());
+
+		}
+
+		List<IPermissionIdList> rolesPermission = rolePermissionRepository.findPkPermissionByPkRoleIdIn(roles, IPermissionIdList.class);
+		ArrayList<String> permissions = new ArrayList<>();
+
+		for (IPermissionIdList element : rolesPermission) {
+
+			permissions.add(element.getPkPermissionActionName());
+
+		}
+
+		return permissions;
+
+	}
+
+
+
+
+
+
+
+
+
+
+
+	@Override
+	public ArrayList<String> getPermissionByUserId(int id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 
 

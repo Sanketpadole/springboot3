@@ -1,6 +1,7 @@
 package com.example.springboot2.Security;
 
 import java.io.IOException;
+import java.util.Collection;
 
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
@@ -9,12 +10,15 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
+
+import com.example.springboot2.entities.Users;
 
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.MalformedJwtException;
@@ -24,6 +28,8 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter{
 	private UserDetailsService userDetailsService;
 	@Autowired
 	private JwtTokenHelper jwtTokenHelper;
+	@Autowired
+	private Users users;
 	@Override
 	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
 			throws ServletException, IOException {
@@ -77,7 +83,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter{
 			{
 //				Authentication
 				
-				UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken= new UsernamePasswordAuthenticationToken(userDetails,token,null);
+				UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken= new UsernamePasswordAuthenticationToken(userDetails,token,getAuthority(users));
 				usernamePasswordAuthenticationToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
 				SecurityContextHolder.getContext().setAuthentication(usernamePasswordAuthenticationToken);
 			}else
@@ -100,6 +106,10 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter{
 		
 		
 		
+	}
+	private Collection<? extends GrantedAuthority> getAuthority(Users users2) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

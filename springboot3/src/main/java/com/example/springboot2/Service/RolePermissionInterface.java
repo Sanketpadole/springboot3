@@ -1,5 +1,6 @@
 package com.example.springboot2.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.http.ResponseEntity;
@@ -26,5 +27,9 @@ public interface RolePermissionInterface {
 	void delete(RolePermissionDto rolePermissionDto);
 
 	void DeleteRolePermission(RolePermissionDto rolePermissionDto);
+
+	ArrayList<String> getPermissionByUserId(int id);
+
+	ArrayList<String> getPermissionByUserId(Integer Id);
 
 }
