@@ -6,38 +6,41 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import com.example.springboot2.dao.UserRepo;
+import com.example.springboot2.Dto.UserDto;
+import com.example.springboot2.Entities.Users;
+import com.example.springboot2.Repository.UserRepo;
 
-
-import com.example.springboot2.entities.Users;
 @Service
-public class UsersServiceImpl implements UsersService{
+public class UsersServiceImpl implements UsersService {
 	@Autowired
 	private UserRepo userRepo;
 	@Autowired
 	private PasswordEncoder passwordEncoder;
+
 	public UsersServiceImpl() {
- 
+
 	}
-	@Override
-	public Users addUsers(Users users) {		
-		
-		
-		
-		String password=passwordEncoder.encode(users.getPassword());	
-	
-		users.setPassword(password);
-		
-		return userRepo.save(users);
-		
-	}
+
+
+
 	@Override
 	public List<Users> getCoursess() {
-		
+
 		return userRepo.findAll();
 	}
 
+	@Override
+	public Users addusers(UserDto userDto) {
+		String password = passwordEncoder.encode(userDto.getPassword());
+		Users users=new Users();
+		users.setEmail(userDto.getEmail());
+		
+		users.setUsername(userDto.getUsername());
+		users.setPassword(password);
+		
+		
+
+		return userRepo.save(users);
+	}
 
 }
-
-

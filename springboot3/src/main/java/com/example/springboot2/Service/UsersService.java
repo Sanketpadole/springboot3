@@ -4,15 +4,16 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import com.example.springboot2.Dto.UserDto;
+import com.example.springboot2.Entities.Users;
 
-import com.example.springboot2.entities.Users;
 @Service
 public interface UsersService {
 
 
 
-	public Users addUsers(Users users);
-
 	public List<Users> getCoursess();
+
+	public Users addusers(UserDto userDto);
 
 }

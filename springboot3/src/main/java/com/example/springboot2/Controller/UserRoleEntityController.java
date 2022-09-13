@@ -13,52 +13,37 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-
+import com.example.springboot2.Dto.UserRoleEntityDto;
+import com.example.springboot2.Entities.UserRoleEntity;
 import com.example.springboot2.Service.UserRoleEntityServiceInterface;
-import com.example.springboot2.dto.UserRoleEntityDto;
-
-import com.example.springboot2.entities.UserRoleEntity;
 
 @RestController
-@RequestMapping("/URE")
+@RequestMapping("/UserRoleEntity")
 public class UserRoleEntityController {
 	@Autowired
 	private UserRoleEntityServiceInterface userRoleEntityServiceInterface;
-	
+
 	@PostMapping
 	public ResponseEntity<?> userRoleEntities(@RequestBody UserRoleEntityDto userRoleEntityDto) {
-		
+
 		return userRoleEntityServiceInterface.addUserRoleEntity(userRoleEntityDto);
 
-		}
-	
-	
-	
+	}
+
 	@GetMapping
 	public List<UserRoleEntity> getusersentity() {
 		return userRoleEntityServiceInterface.getuserrolls();
 	}
-	
-	
-	
 
 	@PutMapping
-	public void  updateUserRole(@RequestBody UserRoleEntityDto userRoleEntityDto){
-		 userRoleEntityServiceInterface.update(userRoleEntityDto);
-		
+	public void updateUserRole(@RequestBody UserRoleEntityDto userRoleEntityDto) {
+		userRoleEntityServiceInterface.update(userRoleEntityDto);
+
 	}
+
 	@DeleteMapping
 	public void Delete(@RequestBody UserRoleEntityDto userRoleEntityDto) {
 		userRoleEntityServiceInterface.delete(userRoleEntityDto);
 	}
-	
+
 }
-	
-
-	
-	
-	
-		
-	
-
-

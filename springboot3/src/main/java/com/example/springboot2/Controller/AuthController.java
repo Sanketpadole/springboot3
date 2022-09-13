@@ -1,10 +1,6 @@
 package com.example.springboot2.Controller;
 
-
-
-
 import java.util.Calendar;
-
 
 import javax.servlet.http.HttpServletRequest;
 import javax.transaction.Transactional;
@@ -14,7 +10,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
@@ -22,21 +17,22 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.springboot2.Security.CustomUserDetailService;
+import com.example.springboot2.Dto.ErrorResponseDto;
+import com.example.springboot2.Dto.LoggerDto;
+import com.example.springboot2.Dto.UserDto;
+import com.example.springboot2.Entities.JwtAuthRequest;
+import com.example.springboot2.Entities.Users;
+import com.example.springboot2.Exception.ResourceNotFoundException;
+import com.example.springboot2.Repository.UserRepo;
+import com.example.springboot2.Security.AuthServiceInterface;
+import com.example.springboot2.Security.AuthServiceImpl;
 import com.example.springboot2.Security.JwtAuthResponse;
 import com.example.springboot2.Security.JwtTokenHelper;
 import com.example.springboot2.Service.LoggerServiceImpl;
-
-import com.example.springboot2.dao.UserRepo;
-import com.example.springboot2.dto.ErrorResponseDto;
-import com.example.springboot2.dto.LoggerDto;
-import com.example.springboot2.entities.JwtAuthRequest;
-import com.example.springboot2.entities.Users;
-
-import com.example.springboot2.exception.ResourceNotFoundException;
+import com.example.springboot2.Service.UsersService;
 
 @RestController
-@RequestMapping("/api/v1/auth")	
+@RequestMapping("/api/v1/auth")
 public class AuthController {
 	@Autowired
 	private JwtTokenHelper jwtTokenHelper;
@@ -45,117 +41,95 @@ public class AuthController {
 	private AuthenticationManager authenticationManager;
 
 	@Autowired
-	private CustomUserDetailService customUserDetailService;
-	
+	private AuthServiceImpl customUserDetailService;
+
 	@Autowired
 	private UserRepo userRepo;
-	
+
 	@Autowired
 	private LoggerServiceImpl loggerServiceImpl;
 	
 	
+	@Autowired
+	private UsersService usersService;
+	
+	
+	
+	@Autowired
+	private AuthServiceInterface authServiceInterface;
 
-	
-	
 	@Transactional
-	@RequestMapping(value = "/logout",method = RequestMethod.POST)
-	public ResponseEntity<?> logoutUser(@RequestHeader("Authorization") String token, HttpServletRequest request) throws Exception {
+	@RequestMapping(value = "/logout", method = RequestMethod.POST)
+	public ResponseEntity<?> logoutUser(@RequestHeader("Authorization") String token, HttpServletRequest request)
+			throws Exception {
 
 		loggerServiceImpl.logoutUser(token);
-		
-	return new ResponseEntity<>(new ErrorResponseDto("Logout Successfully", "logoutSuccess",request), HttpStatus.OK);
 
-		}
-	
-	
-	@PostMapping("/log")
-	public ResponseEntity<?> createAuthenticationToken( @RequestBody JwtAuthRequest authenticationRequest) throws Exception, ResourceNotFoundException {
-
-		try {
-
-			Users users = userRepo.findByEmail(authenticationRequest.getEmail());
-
-			if (this.customUserDetailService.comparePassword(authenticationRequest.getPassword(), users.getPassword())) {
-
-		
-			
-
-			
-			this.customUserDetailService.loadUserByUsername(authenticationRequest.getUsername());
-			
-			String token=this.jwtTokenHelper.generateToken(users);	
-			LoggerDto dto =new LoggerDto();
-			dto.setToken(token);
-			Calendar calendar=Calendar.getInstance();
-			calendar.add(calendar.MINUTE, 50);
-			
-			dto.setExpireAt(calendar.getTime());
-			
-			
-			this.loggerServiceImpl.createLogger(dto, users);
-			
-			JwtAuthResponse response=new JwtAuthResponse();
-			
-			
-			
-			response.setToken(token);
-			
-			
-			return  new ResponseEntity<>(response,HttpStatus.OK);
-			}
-		
-		
-		
-		
-		}catch(Exception e) {
-		System.out.println("error ____________");	
-		}
-		return ResponseEntity.ok(HttpStatus.CREATED);
-	
-	
-	
-
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+		return new ResponseEntity<>(new ErrorResponseDto("Logout Successfully", "logoutSuccess", request),
+				HttpStatus.OK);
 
 	}
 	
 	
-
 	
 	
+	@PostMapping("/register")
 	
-	
-	
-	
-
-	
-	
+	public Users addusers(@RequestBody UserDto userDto) {
+		return usersService.addusers(userDto);
+	}
 	
 
+	@PostMapping("/login")
 	
-	
-	
-	private void authenticate(String username,String password) {
-		UsernamePasswordAuthenticationToken  authenticationToken =new UsernamePasswordAuthenticationToken(username,password);
-		
+	public ResponseEntity<?> createAuthenticationToken(@RequestBody JwtAuthRequest authenticationRequest)
+			throws Exception, ResourceNotFoundException {
+		System.out.println("hello");
+		try {
+			System.out.println("hello0");
+			System.out.println("Email"+authenticationRequest.getEmail());
+			Users users = userRepo.findByEmail(authenticationRequest.getEmail());
+			System.out.println("usera>>" + users.getEmail());
+
+			if (this.customUserDetailService.comparePassword(authenticationRequest.getPassword(),
+					users.getPassword())) {
+
+				System.out.println("hello2");
+
+//				 UserDetails userDetails = this.customUserDetailService
+//				 .loadUserByUsername(authenticationRequest.getEmail());
+				System.out.println("userdEtails>>" + users);
+				String token = this.jwtTokenHelper.generateToken(users);
+				System.out.println("hello4");
+				LoggerDto dto = new LoggerDto();
+				dto.setToken(token);
+				Calendar calendar = Calendar.getInstance();
+				calendar.add(calendar.MINUTE, 50);
+
+				dto.setExpireAt(calendar.getTime());
+
+				this.loggerServiceImpl.createLogger(dto, users);
+				System.out.println("hello5");
+				JwtAuthResponse response = new JwtAuthResponse();
+
+				response.setToken(token);
+
+				return new ResponseEntity<>(response, HttpStatus.OK);
+			}
+
+		} catch (Exception e) {
+			System.out.println("error ____________");
+		}
+
+		return new ResponseEntity<>("fail", HttpStatus.BAD_REQUEST);
+
+	}
+
+	private void authenticate(String username, String password) {
+		UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(username,
+				password);
+
 		this.authenticationManager.authenticate(authenticationToken);
 
-}
+	}
 }

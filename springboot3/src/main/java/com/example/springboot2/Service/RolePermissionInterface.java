@@ -3,22 +3,15 @@ package com.example.springboot2.Service;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import com.example.springboot2.dto.PermissionRequestDto;
-import com.example.springboot2.dto.RolePermissionDto;
-import com.example.springboot2.dto.UserRoleEntityDto;
-import com.example.springboot2.entities.RolePermissionEntity;
+import com.example.springboot2.Dto.RolePermissionDto;
+import com.example.springboot2.Entities.RolePermissionEntity;
 
 @Service
 public interface RolePermissionInterface {
 
-	ResponseEntity<?> addRolepermission(PermissionRequestDto permissionRequestDto);
-
-	ResponseEntity<?> addRolepermission(RolePermissionDto rolePermissionDto);
-
-//	void update(UserRoleEntityDto userRoleEntityDto);
+	RolePermissionDto addRolepermission(RolePermissionDto rolePermissionDto);
 
 	void update(RolePermissionDto rolePermissionDto);
 
@@ -28,8 +21,10 @@ public interface RolePermissionInterface {
 
 	void DeleteRolePermission(RolePermissionDto rolePermissionDto);
 
-	ArrayList<String> getPermissionByUserId(int id);
+//	ArrayList<String> getPermissionByUserId(Integer id);
 
-	ArrayList<String> getPermissionByUserId(Integer Id);
+
+
+//	ArrayList<String> getPermissionByUserId(Integer userId);
 
 }

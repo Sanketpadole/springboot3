@@ -10,7 +10,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
-import com.example.springboot2.entities.Users;
+import com.example.springboot2.Entities.Users;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
@@ -71,9 +71,14 @@ public class JwtTokenHelper implements Serializable {
 
 	// generate token for user
 	public String generateToken(Users userDetails) {
-
+		System.out.println("token");
 		Map<String, Object> claims = new HashMap<>();
-		return doGenerateToken(claims, userDetails.toString());
+		
+		return doGenerateToken(claims, userDetails.getEmail());
+		
+		
+		
+		
 
 	}
 
@@ -93,13 +98,17 @@ public class JwtTokenHelper implements Serializable {
 	// compaction of the JWT to a URL-safe string
 	private String doGenerateToken(Map<String, Object> claims, String subject) {
 
-		return Jwts.builder().setClaims(claims).setSubject(subject).setIssuedAt(new Date(System.currentTimeMillis())).setExpiration(new Date(System.currentTimeMillis() + (JWT_TOKEN_VALIDITY * 1000))).signWith(SignatureAlgorithm.HS512, secret).compact();
+		return Jwts.builder().setClaims(claims).setSubject(subject).setIssuedAt(new Date(System.currentTimeMillis()))
+				.setExpiration(new Date(System.currentTimeMillis() + (JWT_TOKEN_VALIDITY * 1000)))
+				.signWith(SignatureAlgorithm.HS512, secret).compact();
 
 	}
 
 	private String doGenerateTokenOnForgotPass(Map<String, Object> claims, String subject) {
 
-		return Jwts.builder().setClaims(claims).setSubject(subject).setIssuedAt(new Date(System.currentTimeMillis())).setExpiration(new Date(System.currentTimeMillis() + (JWT_TOKEN_VALIDITY_FORGOT_PASS * 1000))).signWith(SignatureAlgorithm.HS512, secret).compact();
+		return Jwts.builder().setClaims(claims).setSubject(subject).setIssuedAt(new Date(System.currentTimeMillis()))
+				.setExpiration(new Date(System.currentTimeMillis() + (JWT_TOKEN_VALIDITY_FORGOT_PASS * 1000)))
+				.signWith(SignatureAlgorithm.HS512, secret).compact();
 
 	}
 

@@ -3,13 +3,11 @@ package com.example.springboot2.Service;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import com.example.springboot2.dto.IRoleListDto;
-import com.example.springboot2.dto.RolePermissionDto;
-import com.example.springboot2.entities.RoleEntity;
+import com.example.springboot2.Entities.RoleEntity;
+
 @Service
 public interface RoleServiceInterface {
 
@@ -17,16 +15,14 @@ public interface RoleServiceInterface {
 
 	List<RoleEntity> getRoles();
 
-	RoleEntity updateRole(Integer id, RoleEntity roleEntity);
+	ResponseEntity<?> updateRole(Integer id, RoleEntity roleEntity);
 
 	void deleteRoll(Integer id, RoleEntity roleEntity);
 
 	ResponseEntity<?> getRolesId(Integer id);
 
-	RolePermissionDto getRoleAndPermissionById(Integer roleId);
+	ResponseEntity<?> put(Integer Id, RoleEntity roleEntity);
 
-	Page<IRoleListDto> getAllRoles(String search, String pageNo, String size);
 
-	ArrayList<String> getPermissionByUserId(Integer Id);
 
 }

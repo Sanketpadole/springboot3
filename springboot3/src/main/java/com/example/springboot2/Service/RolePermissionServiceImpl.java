@@ -4,28 +4,22 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestBody;
 
-import com.example.springboot2.dao.PermissionRepository;
-import com.example.springboot2.dao.RoleEntityRepository;
-import com.example.springboot2.dao.RolePermissionRepository;
-import com.example.springboot2.dao.UserRoleEntityRepository;
-import com.example.springboot2.dto.ErrorResponseDto;
-import com.example.springboot2.dto.PermissionRequestDto;
-import com.example.springboot2.dto.RoleIdList;
-import com.example.springboot2.dto.RolePermissionDto;
-import com.example.springboot2.dto.UserRoleEntityDto;
-import com.example.springboot2.entities.PermissionEntity;
-import com.example.springboot2.entities.RoleEntity;
-import com.example.springboot2.entities.RolePermissionEntity;
-import com.example.springboot2.entities.RolePermissionId;
-import com.example.springboot2.entities.UserRoleEntity;
-import com.example.springboot2.entities.UserRoleId;
-import com.example.springboot2.entities.Users;
-import com.example.springboot2.exception.ResourceNotFoundException;
+import org.springframework.stereotype.Service;
+
+import com.example.springboot2.Dto.IPermissionIdList;
+
+import com.example.springboot2.Dto.RolePermissionDto;
+import com.example.springboot2.Entities.PermissionEntity;
+import com.example.springboot2.Entities.RoleEntity;
+import com.example.springboot2.Entities.RolePermissionEntity;
+import com.example.springboot2.Entities.RolePermissionId;
+import com.example.springboot2.Entities.UserRoleEntity;
+import com.example.springboot2.Exception.ResourceNotFoundException;
+import com.example.springboot2.Repository.PermissionRepository;
+import com.example.springboot2.Repository.RoleEntityRepository;
+import com.example.springboot2.Repository.RolePermissionRepository;
+import com.example.springboot2.Repository.UserRoleEntityRepository;
 
 @Service
 public class RolePermissionServiceImpl implements RolePermissionInterface {
@@ -38,325 +32,117 @@ public class RolePermissionServiceImpl implements RolePermissionInterface {
 	private RolePermissionRepository rolePermissionRepository;
 	@Autowired
 	private UserRoleEntityRepository userRoleEntityRepository;
-	
-
-	
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-				
-
-	
-
 
 	@Override
-	public ResponseEntity<?> addRolepermission(RolePermissionDto rolePermissionDto) {
-		try {
-			RoleEntity roleEntity=new RoleEntity();
-			RoleEntity roleEntity1=this.roleEntityRepository.findById(rolePermissionDto.getRoleid()).orElseThrow(()-> new ResourceNotFoundException("not found"));
-			PermissionEntity permissionEntity=new PermissionEntity();
-			PermissionEntity permissionEntity1=this.permissionRepository.findById(rolePermissionDto.getId()).orElseThrow(()->new ResourceNotFoundException("permission not found"));
-			
-			if(roleEntity1!=null && permissionEntity1!=null)
-			{
-				ArrayList<RolePermissionEntity>rolePermission=new ArrayList<>();
-				RolePermissionEntity rolePermissionEntity=new RolePermissionEntity();
-				RolePermissionId rolePermissionId=new RolePermissionId();
-				rolePermissionId.setPermission(permissionEntity1);
-				rolePermissionId.setRole(roleEntity1);
-				rolePermissionEntity.setPk(rolePermissionId);
-				rolePermission.add(rolePermissionEntity);
-				rolePermissionRepository.saveAll(rolePermission);
-			}
-			else {
-				throw new ResourceNotFoundException("not found");
-			}
-			}
-		catch(Exception e){
-			System.out.println("invalid data");
-			return ResponseEntity.ok(HttpStatus.BAD_REQUEST);
-		}
-		return new ResponseEntity<>(new ErrorResponseDto("success","success",rolePermissionDto),HttpStatus.ACCEPTED);
-	}
-			
-		
-		
-		
-	
+	public RolePermissionDto addRolepermission(RolePermissionDto rolePermissionDto) {
 
+		ArrayList<RolePermissionEntity> rolePermission = new ArrayList<>();
 
+		RoleEntity roleEntity1 = this.roleEntityRepository.findById(rolePermissionDto.getRoleid())
+				.orElseThrow(() -> new ResourceNotFoundException("not found"));
+		System.out.println("role" + roleEntity1);
 
+		PermissionEntity permissionEntity1 = this.permissionRepository.findById(rolePermissionDto.getPermissionid())
+				.orElseThrow(() -> new ResourceNotFoundException("permission not found"));
+		System.out.println("role" + permissionEntity1);
 
+		RolePermissionEntity rolePermissionEntity = new RolePermissionEntity();
+		RolePermissionId rolePermissionId = new RolePermissionId(roleEntity1, permissionEntity1);
+		rolePermissionEntity.setPk(rolePermissionId);
+		rolePermission.add(rolePermissionEntity);
+		rolePermissionRepository.saveAll(rolePermission);
+		return rolePermissionDto;
 
-
-	@Override
-	public ResponseEntity<?> addRolepermission(PermissionRequestDto permissionRequestDto) {
-		
-		return null;
 	}
 
-
-
-
-
-
-
-
-
-
-
-
-	
-	
-	
-	
-	
-	
 	@Override
 	public void update(RolePermissionDto rolePermissionDto) {
-		
 
-			RoleEntity roleEntity=this.roleEntityRepository.findById(rolePermissionDto.getRoleid()).orElseThrow(()-> new ResourceNotFoundException("not found"));
-			
+		RoleEntity roleEntity = this.roleEntityRepository.findById(rolePermissionDto.getRoleid())
+				.orElseThrow(() -> new ResourceNotFoundException("not found"));
 
-			PermissionEntity permissionEntity=this.permissionRepository.findById(rolePermissionDto.getId()).orElseThrow(()->new ResourceNotFoundException("permission not found"));
-			
-			
-			if(roleEntity!=null && permissionEntity!=null)
-			{
-				ArrayList<RolePermissionEntity>rolePermission=new ArrayList<>();
-				RolePermissionEntity rolePermissionEntity=new RolePermissionEntity();
-				RolePermissionId rolePermissionId=new RolePermissionId();
-				rolePermissionId.setPermission(permissionEntity);
-				rolePermissionId.setRole(roleEntity);
-				rolePermissionEntity.setPk(rolePermissionId);
-				rolePermission.add(rolePermissionEntity);
-				
+		PermissionEntity permissionEntity = this.permissionRepository.findById(rolePermissionDto.getPermissionid())
+				.orElseThrow(() -> new ResourceNotFoundException("permission not found"));
 
-				
-				rolePermissionRepository.updateRolePermission(roleEntity.getId(),permissionEntity.getId());
-				
-			}
-			else {
-				throw new ResourceNotFoundException("not found");
-			}
+		if (roleEntity != null && permissionEntity != null) {
+			ArrayList<RolePermissionEntity> rolePermission = new ArrayList<>();
+			RolePermissionEntity rolePermissionEntity = new RolePermissionEntity();
+			RolePermissionId rolePermissionId = new RolePermissionId();
+			rolePermissionId.setPermission(permissionEntity);
+			rolePermissionId.setRole(roleEntity);
+			rolePermissionEntity.setPk(rolePermissionId);
+			rolePermission.add(rolePermissionEntity);
+
+			rolePermissionRepository.updateRolePermission(roleEntity.getRoleid(), permissionEntity.getId());
+
+		} else {
+			throw new ResourceNotFoundException("not found");
 		}
-	
-	
-	
-	
-	
-
-
-
-	
-
-
-
-
-
-
-
-
-
-
-
-
-//	@Override
-//	public void update(UserRoleEntityDto userRoleEntityDto) {
-//		// TODO Auto-generated method stub
-//		
-//	}
-
-
-
-
-
-
-
-
-
-
+	}
 
 	@Override
 	public List<RolePermissionEntity> get() {
-		// TODO Auto-generated method stub
-		return rolePermissionRepository.findAll() ;
+
+		return rolePermissionRepository.findAll();
 	}
 
-
-
-
-
-
-
-
-
-
-
 	@Override
-	public void delete( RolePermissionDto rolePermissionDto) {
-		RoleEntity roleEntity=this.roleEntityRepository.findById(rolePermissionDto.getRoleid()).orElseThrow(()-> new ResourceNotFoundException("not found"));
-		
+	public void delete(RolePermissionDto rolePermissionDto) {
+		RoleEntity roleEntity = this.roleEntityRepository.findById(rolePermissionDto.getRoleid())
+				.orElseThrow(() -> new ResourceNotFoundException("not found"));
 
-		PermissionEntity permissionEntity=this.permissionRepository.findById(rolePermissionDto.getId()).orElseThrow(()->new ResourceNotFoundException("permission not found"));
-		
-		
-		if(roleEntity!=null && permissionEntity!=null)
-		{
-			ArrayList<RolePermissionEntity>rolePermission=new ArrayList<>();
-			RolePermissionEntity rolePermissionEntity=new RolePermissionEntity();
-			RolePermissionId rolePermissionId=new RolePermissionId();
+		PermissionEntity permissionEntity = this.permissionRepository.findById(rolePermissionDto.getPermissionid())
+				.orElseThrow(() -> new ResourceNotFoundException("permission not found"));
+
+		if (roleEntity != null && permissionEntity != null) {
+			ArrayList<RolePermissionEntity> rolePermission = new ArrayList<>();
+			RolePermissionEntity rolePermissionEntity = new RolePermissionEntity();
+			RolePermissionId rolePermissionId = new RolePermissionId();
 			rolePermissionId.setPermission(permissionEntity);
 			rolePermissionId.setRole(roleEntity);
 			rolePermissionEntity.setPk(rolePermissionId);
 			rolePermission.add(rolePermissionEntity);
 			rolePermissionRepository.delete(rolePermissionEntity);
-			
 
-			
-		
-			
-		}
-		else {
+		} else {
 			throw new ResourceNotFoundException("not found");
 		}
 	}
 
-
-
-
-
-
-
-
-
-
-
 	@Override
 	public void DeleteRolePermission(RolePermissionDto rolePermissionDto) {
-		// TODO Auto-generated method stub
-		
-	}
-
-
-
-
-
-
-
-
-
-
-
-	@Override
-	public ArrayList<String> getPermissionByUserId(Integer Id) {
-
-		ArrayList<RoleIdList> roleIds = userRoleEntityRepository.findByPkUserId(Id, RoleIdList.class);
-		ArrayList<Long> roles = new ArrayList<>();
-
-		for (int i = 0; i < roleIds.size(); i++) {
-
-			roles.add(roleIds.get(i).getPkRoleId());
-
-		}
-
-		List<IPermissionIdList> rolesPermission = rolePermissionRepository.findPkPermissionByPkRoleIdIn(roles, IPermissionIdList.class);
-		ArrayList<String> permissions = new ArrayList<>();
-
-		for (IPermissionIdList element : rolesPermission) {
-
-			permissions.add(element.getPkPermissionActionName());
-
-		}
-
-		return permissions;
 
 	}
 
+//	@Override
+//	public ArrayList<String> getPermissionByUserId(Integer userId) {
+//		System.out.println("roleids1");
+//
+//		System.out.println("roleids");
+//		ArrayList<UserRoleEntity> roleEntities = this.userRoleEntityRepository.getRoleOfUser(userId);
+//		System.out.println("check user roel____" + roleEntities);
+//		ArrayList<Integer> roles = new ArrayList<>();
+//
+//		for (int i = 0; i < roleEntities.size(); i++) {
+//
+//			roles.add(roleEntities.get(i).getPk().getRole().getRoleid());
+//			System.out.println("roles" + roles);
+//		}
+//
+//		List<IPermissionIdList> rolesPermission = this.rolePermissionRepository.findPkPermissionByPkRoleIdIn(roles,
+//				IPermissionIdList.class);
+//		System.out.println("rolepermission" + rolesPermission);
+//		ArrayList<String> permissions = new ArrayList<>();
+//		System.out.println("permission1223" + permissions);
+//		for (IPermissionIdList element : rolesPermission) {
+//
+//			permissions.add(element.getPkPermissionActionName());
+//			System.out.println("permission1223" + permissions);
+//
+//		}
+//		System.out.println("permission" + permissions);
+//		return permissions;
+//
+//	}
 
-
-
-
-
-
-
-
-
-
-	@Override
-	public ArrayList<String> getPermissionByUserId(int id) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-
-
-
-
-
-
-
-
-
-
-	
-
-
-
-
-
-
-
-
-
-
-
-	
-	
-	
-	
-	
-	
-
-		
-
-
-
-
-
-
-
-
-
-
-
-
-		
-		
-		
-		
-		
-	}
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-
-	
+}

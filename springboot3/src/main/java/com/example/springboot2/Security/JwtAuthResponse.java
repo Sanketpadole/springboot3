@@ -1,7 +1,7 @@
 package com.example.springboot2.Security;
 
 public class JwtAuthResponse {
-	
+
 	private String token;
 
 	public String getToken() {
@@ -9,8 +9,7 @@ public class JwtAuthResponse {
 	}
 
 	public void setToken(String token) {
-		this.token = token;	
+		this.token = token;
 	}
-	
 
 }
