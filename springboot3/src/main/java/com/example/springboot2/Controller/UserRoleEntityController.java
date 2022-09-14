@@ -15,13 +15,14 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.springboot2.Dto.UserRoleEntityDto;
 import com.example.springboot2.Entities.UserRoleEntity;
-import com.example.springboot2.Service.UserRoleEntityServiceInterface;
+
+import com.example.springboot2.ServiceInterface.UserRoleEntityService;
 
 @RestController
 @RequestMapping("/UserRoleEntity")
 public class UserRoleEntityController {
 	@Autowired
-	private UserRoleEntityServiceInterface userRoleEntityServiceInterface;
+	private UserRoleEntityService userRoleEntityServiceInterface;
 
 	@PostMapping
 	public ResponseEntity<?> userRoleEntities(@RequestBody UserRoleEntityDto userRoleEntityDto) {

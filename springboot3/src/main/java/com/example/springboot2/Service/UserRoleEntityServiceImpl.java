@@ -18,9 +18,10 @@ import com.example.springboot2.Exception.ResourceNotFoundException;
 import com.example.springboot2.Repository.RoleEntityRepository;
 import com.example.springboot2.Repository.UserRepo;
 import com.example.springboot2.Repository.UserRoleEntityRepository;
+import com.example.springboot2.ServiceInterface.UserRoleEntityService;
 
 @Service
-public class UserRoleEntityServiceImpl implements UserRoleEntityServiceInterface {
+public class UserRoleEntityServiceImpl implements UserRoleEntityService {
 	@Autowired
 	private UserRoleEntityRepository userRoleEntityRepository;
 	@Autowired

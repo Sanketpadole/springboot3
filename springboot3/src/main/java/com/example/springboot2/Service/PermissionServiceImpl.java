@@ -12,9 +12,10 @@ import com.example.springboot2.Dto.PermissionRequestDto;
 import com.example.springboot2.Entities.PermissionEntity;
 import com.example.springboot2.Exception.ResourceNotFoundException;
 import com.example.springboot2.Repository.PermissionRepository;
+import com.example.springboot2.ServiceInterface.PermissionService;
 
 @Service
-public class PermissionServiceImpl implements PermissionServiceInterface {
+public class PermissionServiceImpl implements PermissionService {
 	@Autowired
 	private PermissionRepository permissionRepository;
 

@@ -18,17 +18,18 @@ import com.example.springboot2.Dto.ErrorResponseDto;
 import com.example.springboot2.Dto.PermissionRequestDto;
 import com.example.springboot2.Entities.PermissionEntity;
 import com.example.springboot2.Exception.ResourceNotFoundException;
-import com.example.springboot2.Service.PermissionServiceInterface;
+
+import com.example.springboot2.ServiceInterface.PermissionService;
 
 @RestController
 @RequestMapping("/permission")
 public class PermissionController {
 	@Autowired
-	private PermissionServiceInterface permissionServiceInterface;
+	private PermissionService permissionServiceInterface;
 
 	@PostMapping
 	public ResponseEntity<?> Permission(@RequestBody PermissionRequestDto permissionBody) {
-		
+
 		return permissionServiceInterface.addPermission(permissionBody);
 
 	}

@@ -1,4 +1,4 @@
-package com.example.springboot2.Service;
+package com.example.springboot2.ServiceInterface;
 
 import java.util.List;
 
@@ -14,6 +14,6 @@ public interface UsersService {
 
 	public List<Users> getCoursess();
 
-	public Users addusers(UserDto userDto);
+	public UserDto addusers(UserDto userDto);
 
 }

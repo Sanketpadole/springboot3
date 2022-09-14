@@ -5,50 +5,19 @@ import org.springframework.stereotype.Service;
 
 import com.example.springboot2.Entities.ApiLoggerEntity;
 import com.example.springboot2.Repository.ApiLoggerRepository;
-@Service
-public class ApiLoggerServiceImpl implements ApiLoggerSerivceInterface {
+import com.example.springboot2.ServiceInterface.ApiLoggerSerivce;
 
-	
+@Service
+public class ApiLoggerServiceImpl implements ApiLoggerSerivce {
+
 	@Autowired
 	private ApiLoggerRepository apiLoggerRepository;
-	
-	
+
 	@Override
-	public void createApiLog(ApiLoggerEntity api) {
-		apiLoggerRepository.save(api);
-		
-		
+	public void createApiLog(ApiLoggerEntity apiDetail) {
+
+		apiLoggerRepository.save(apiDetail);
+
 	}
 
 }
-
-
-
-
-
-
-
-//import org.springframework.beans.factory.annotation.Autowired;
-//import org.springframework.stereotype.Service;
-//
-//import com.example.springboot2.Entities.ApiLoggerEntity;
-//import com.example.springboot2.Repository.ApiLoggerRepository;
-//
-//@Service("apiLoggerServiceImpl")
-//	public class ApiLoggerServiceImpl implements ApiLoggerSerivceInterface {
-//
-//		public ApiLoggerServiceImpl() {
-//
-//			
-//		}
-//
-//		@Autowired
-//		private ApiLoggerRepository apiLoggerRepository;
-//
-//		public void createApiLog(ApiLoggerEntity api) {
-//
-//			apiLoggerRepository.save(api);
-//
-//		}
-//
-//	}

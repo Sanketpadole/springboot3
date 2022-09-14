@@ -24,12 +24,12 @@ import com.example.springboot2.Entities.JwtAuthRequest;
 import com.example.springboot2.Entities.Users;
 import com.example.springboot2.Exception.ResourceNotFoundException;
 import com.example.springboot2.Repository.UserRepo;
-import com.example.springboot2.Security.AuthServiceInterface;
-import com.example.springboot2.Security.AuthServiceImpl;
+
 import com.example.springboot2.Security.JwtAuthResponse;
 import com.example.springboot2.Security.JwtTokenHelper;
 import com.example.springboot2.Service.LoggerServiceImpl;
-import com.example.springboot2.Service.UsersService;
+import com.example.springboot2.ServiceInterface.AuthService;
+import com.example.springboot2.ServiceInterface.UsersService;
 
 @RestController
 @RequestMapping("/api/v1/auth")
@@ -41,22 +41,19 @@ public class AuthController {
 	private AuthenticationManager authenticationManager;
 
 	@Autowired
-	private AuthServiceImpl customUserDetailService;
+	private AuthService customUserDetailService;
 
 	@Autowired
 	private UserRepo userRepo;
 
 	@Autowired
 	private LoggerServiceImpl loggerServiceImpl;
-	
-	
+
 	@Autowired
 	private UsersService usersService;
-	
-	
-	
+
 	@Autowired
-	private AuthServiceInterface authServiceInterface;
+	private AuthService authServiceInterface;
 
 	@Transactional
 	@RequestMapping(value = "/logout", method = RequestMethod.POST)
@@ -69,38 +66,28 @@ public class AuthController {
 				HttpStatus.OK);
 
 	}
-	
-	
-	
-	
+
 	@PostMapping("/register")
-	
-	public Users addusers(@RequestBody UserDto userDto) {
+
+	public UserDto addusers(@RequestBody UserDto userDto) {
 		return usersService.addusers(userDto);
 	}
-	
 
 	@PostMapping("/login")
-	
+
 	public ResponseEntity<?> createAuthenticationToken(@RequestBody JwtAuthRequest authenticationRequest)
 			throws Exception, ResourceNotFoundException {
-		System.out.println("hello");
+
 		try {
-			System.out.println("hello0");
-			System.out.println("Email"+authenticationRequest.getEmail());
+
+			System.out.println("Email" + authenticationRequest.getEmail());
 			Users users = userRepo.findByEmail(authenticationRequest.getEmail());
 			System.out.println("usera>>" + users.getEmail());
 
-			if (this.customUserDetailService.comparePassword(authenticationRequest.getPassword(),
-					users.getPassword())) {
+			if (this.authServiceInterface.comparePassword(authenticationRequest.getPassword(), users.getPassword())) {
 
-				System.out.println("hello2");
-
-//				 UserDetails userDetails = this.customUserDetailService
-//				 .loadUserByUsername(authenticationRequest.getEmail());
-				System.out.println("userdEtails>>" + users);
 				String token = this.jwtTokenHelper.generateToken(users);
-				System.out.println("hello4");
+
 				LoggerDto dto = new LoggerDto();
 				dto.setToken(token);
 				Calendar calendar = Calendar.getInstance();
@@ -109,7 +96,7 @@ public class AuthController {
 				dto.setExpireAt(calendar.getTime());
 
 				this.loggerServiceImpl.createLogger(dto, users);
-				System.out.println("hello5");
+
 				JwtAuthResponse response = new JwtAuthResponse();
 
 				response.setToken(token);
@@ -118,7 +105,7 @@ public class AuthController {
 			}
 
 		} catch (Exception e) {
-			System.out.println("error ____________");
+			System.out.println("Email or Password Does Not match");
 		}
 
 		return new ResponseEntity<>("fail", HttpStatus.BAD_REQUEST);

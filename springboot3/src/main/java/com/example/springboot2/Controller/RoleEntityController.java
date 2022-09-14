@@ -22,7 +22,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.springboot2.Dto.ErrorResponseDto;
 import com.example.springboot2.Entities.RoleEntity;
 import com.example.springboot2.Repository.RoleEntityRepository;
-import com.example.springboot2.Service.RoleServiceInterface;
+
+import com.example.springboot2.ServiceInterface.RoleService;
 
 @RestController
 @RequestMapping("/Role")
@@ -31,7 +32,7 @@ public class RoleEntityController {
 	private RoleEntityRepository roleEntityRepository;
 
 	@Autowired
-	private RoleServiceInterface roleServiceInterface;
+	private RoleService roleServiceInterface;
 
 	@PostMapping
 	public ResponseEntity<?> addRole(@RequestBody RoleEntity roleEntity, HttpServletRequest request) {

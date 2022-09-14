@@ -16,6 +16,8 @@ import org.springframework.security.web.authentication.WebAuthenticationDetailsS
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
+import com.example.springboot2.Service.AuthServiceImpl;
+
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.MalformedJwtException;
 
@@ -61,7 +63,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 		if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
 
 			UserDetails userDetails = this.customUserDetailService.loadUserByUsername(username);
-//			System.out.println("uyhiutyviytv  iytvgiyt  "+userDetails);
+
 
 			if (this.jwtTokenHelper.validateToken(token, userDetails)) {
 //				Authentication

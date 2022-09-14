@@ -1,15 +1,13 @@
-package com.example.springboot2.Security;
+package com.example.springboot2.ServiceInterface;
 
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
-import com.example.springboot2.Dto.UserDto;
-import com.example.springboot2.Entities.Users;
 @Service
-public interface AuthServiceInterface {
+public interface AuthService {
 
 	public UserDetails loadUserByUsername(String email);
 
-
+	public Boolean comparePassword(String password, String password2);
 
 }

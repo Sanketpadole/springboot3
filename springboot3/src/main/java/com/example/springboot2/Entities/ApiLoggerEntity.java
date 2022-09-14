@@ -1,6 +1,5 @@
 package com.example.springboot2.Entities;
 
-import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -14,16 +13,16 @@ import org.hibernate.annotations.CreationTimestamp;
 
 @Entity
 @Table(name = "api_logger")
-public class ApiLoggerEntity  {
+public class ApiLoggerEntity {
 
 	private static final long serialVersionUID = 1L;
 
 	public ApiLoggerEntity() {
 
-		
 	}
 
-	public ApiLoggerEntity(Long id, String userToken, String ipAddress, String url, String method, String host, String body, Date createdAt) {
+	public ApiLoggerEntity(Long id, String userToken, String ipAddress, String url, String method, String host,
+			String body, Date createdAt) {
 
 		super();
 		this.id = id;

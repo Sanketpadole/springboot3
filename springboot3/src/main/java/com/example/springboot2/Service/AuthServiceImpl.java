@@ -1,10 +1,6 @@
-package com.example.springboot2.Security;
-
-import java.util.ArrayList;
+package com.example.springboot2.Service;
 
 import org.springframework.beans.factory.annotation.Autowired;
-
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -14,15 +10,16 @@ import org.springframework.stereotype.Service;
 
 import com.example.springboot2.Entities.Users;
 import com.example.springboot2.Repository.UserRepo;
-import com.example.springboot2.Service.RolePermissionInterface;
+import com.example.springboot2.ServiceInterface.AuthService;
+import com.example.springboot2.ServiceInterface.RolePermissionService;
 
 @Service
 @Component
-public class AuthServiceImpl implements AuthServiceInterface {
+public class AuthServiceImpl implements AuthService {
 	@Autowired
 	private UserRepo userRepo;
 	@Autowired
-	private RolePermissionInterface rolePermissionInterface;
+	private RolePermissionService rolePermissionInterface;
 
 	@Autowired
 	private PasswordEncoder passwordEncoder;
@@ -57,7 +54,6 @@ public class AuthServiceImpl implements AuthServiceInterface {
 //		
 //		
 //	}
-
 
 //	private ArrayList<SimpleGrantedAuthority> getAuthority(Users users) {
 //
@@ -98,7 +94,7 @@ public class AuthServiceImpl implements AuthServiceInterface {
 			System.out.println();
 
 		}
-			return users;
+		return users;
 	}
 //		return new org.springframework.security.core.userdetails.User(users.getEmail(), users.getPassword(),
 //				getAuthority(users));

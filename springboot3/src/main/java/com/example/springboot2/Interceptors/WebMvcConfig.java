@@ -8,11 +8,10 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration
 @EnableWebMvc
-public class WebMvcConfig implements WebMvcConfigurer  {
+public class WebMvcConfig implements WebMvcConfigurer {
 
 	public WebMvcConfig() {
 
-		
 	}
 
 	@Autowired
@@ -21,7 +20,7 @@ public class WebMvcConfig implements WebMvcConfigurer  {
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
 
-		registry.addInterceptor(apiLogger).addPathPatterns("/api/**");
+		registry.addInterceptor(apiLogger);
 
 	}
 

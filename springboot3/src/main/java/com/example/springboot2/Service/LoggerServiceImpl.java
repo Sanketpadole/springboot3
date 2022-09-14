@@ -11,9 +11,10 @@ import com.example.springboot2.Dto.LoggerDto;
 import com.example.springboot2.Entities.LoggerEntity;
 import com.example.springboot2.Entities.Users;
 import com.example.springboot2.Repository.LoggerDtoRepository;
+import com.example.springboot2.ServiceInterface.LoggerService;
 
 @Service("LoggerServiceImpl")
-public class LoggerServiceImpl implements LoggerServiceInterface {
+public class LoggerServiceImpl implements LoggerService {
 	@Autowired
 	private LoggerDtoRepository loggerDtoRepository;
 
@@ -46,6 +47,7 @@ public class LoggerServiceImpl implements LoggerServiceInterface {
 //
 //		if (!cache.isKeyExist(token, token)) {
 
+		System.out.println("hello");
 			LoggerEntity logger = loggerDtoRepository.findByToken(token);
 //			cache.addInCache(token, token, logger);
 //

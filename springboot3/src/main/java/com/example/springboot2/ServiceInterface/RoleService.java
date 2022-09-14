@@ -1,6 +1,5 @@
-package com.example.springboot2.Service;
+package com.example.springboot2.ServiceInterface;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.http.ResponseEntity;
@@ -9,7 +8,7 @@ import org.springframework.stereotype.Service;
 import com.example.springboot2.Entities.RoleEntity;
 
 @Service
-public interface RoleServiceInterface {
+public interface RoleService {
 
 	RoleEntity addRole(RoleEntity roleEntity);
 
@@ -22,7 +21,5 @@ public interface RoleServiceInterface {
 	ResponseEntity<?> getRolesId(Integer id);
 
 	ResponseEntity<?> put(Integer Id, RoleEntity roleEntity);
-
-
 
 }

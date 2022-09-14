@@ -1,4 +1,4 @@
-package com.example.springboot2.Service;
+package com.example.springboot2.ServiceInterface;
 
 import java.util.List;
 
@@ -9,7 +9,7 @@ import com.example.springboot2.Dto.UserRoleEntityDto;
 import com.example.springboot2.Entities.UserRoleEntity;
 
 @Service
-public interface UserRoleEntityServiceInterface {
+public interface UserRoleEntityService {
 
 	ResponseEntity<?> addUserRoleEntity(UserRoleEntityDto userRoleEntityDto);
 

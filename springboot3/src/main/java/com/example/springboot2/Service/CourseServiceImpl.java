@@ -16,6 +16,7 @@ import com.example.springboot2.Dto.ErrorResponseDto;
 import com.example.springboot2.Entities.Course;
 import com.example.springboot2.Exception.ResourceNotFoundException;
 import com.example.springboot2.Repository.CourseRepository;
+import com.example.springboot2.ServiceInterface.CourseService;
 
 @Service
 public class CourseServiceImpl implements CourseService {

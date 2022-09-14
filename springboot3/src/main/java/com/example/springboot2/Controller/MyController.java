@@ -19,7 +19,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.springboot2.Entities.Course;
-import com.example.springboot2.Service.CourseService;
+import com.example.springboot2.ServiceInterface.CourseService;
+
 
 @RestController
 @RequestMapping("/courses")

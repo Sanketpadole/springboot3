@@ -1,4 +1,4 @@
-package com.example.springboot2.Service;
+package com.example.springboot2.ServiceInterface;
 
 import java.util.List;
 
@@ -9,7 +9,7 @@ import com.example.springboot2.Dto.PermissionRequestDto;
 import com.example.springboot2.Entities.PermissionEntity;
 
 @Service
-public interface PermissionServiceInterface {
+public interface PermissionService {
 
 	ResponseEntity<?> addPermission(PermissionRequestDto permissionBody);
 

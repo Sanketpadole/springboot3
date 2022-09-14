@@ -18,7 +18,6 @@ public class UserRoleId implements java.io.Serializable {
 
 		super();
 
-		// TODO Auto-generated constructor stub
 	}
 
 	public UserRoleId(Users user, RoleEntity role) {

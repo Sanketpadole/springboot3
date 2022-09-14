@@ -7,22 +7,21 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.stereotype.Service;
 
-import com.example.springboot2.Dto.IPermissionIdList;
-
 import com.example.springboot2.Dto.RolePermissionDto;
 import com.example.springboot2.Entities.PermissionEntity;
 import com.example.springboot2.Entities.RoleEntity;
 import com.example.springboot2.Entities.RolePermissionEntity;
 import com.example.springboot2.Entities.RolePermissionId;
-import com.example.springboot2.Entities.UserRoleEntity;
+
 import com.example.springboot2.Exception.ResourceNotFoundException;
 import com.example.springboot2.Repository.PermissionRepository;
 import com.example.springboot2.Repository.RoleEntityRepository;
 import com.example.springboot2.Repository.RolePermissionRepository;
 import com.example.springboot2.Repository.UserRoleEntityRepository;
+import com.example.springboot2.ServiceInterface.RolePermissionService;
 
 @Service
-public class RolePermissionServiceImpl implements RolePermissionInterface {
+public class RolePermissionServiceImpl implements RolePermissionService {
 	@Autowired
 	private RoleEntityRepository roleEntityRepository;
 
