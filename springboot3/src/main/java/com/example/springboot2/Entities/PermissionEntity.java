@@ -86,7 +86,7 @@ public class PermissionEntity implements Serializable {
 		return serialVersionUID;
 	}
 
-	public PermissionEntity(Integer id, String actionName, String description, EntityEntity entityId, String method,
+	public PermissionEntity(Integer id, String actionName, String description,  String method,
 			String baseUrl, String path, Boolean isActive, Date createdAt, Date updatedAt) {
 		super();
 		this.id = id;

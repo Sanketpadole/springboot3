@@ -25,10 +25,10 @@ public class FileUploadEntity implements Serializable {
 
 		super();
 
-		// TODO Auto-generated constructor stub
 	}
 
-	public FileUploadEntity(Long id, String filename, String type, String mimetype, String encoding, Long size, String originalName, Long userId, Date createdAt) {
+	public FileUploadEntity(Long id, String filename, String type, String mimetype, String encoding, Long size,
+			String originalName, Date createdAt) {
 
 		super();
 		this.id = id;
@@ -38,7 +38,7 @@ public class FileUploadEntity implements Serializable {
 		this.encoding = encoding;
 		this.size = size;
 		this.originalName = originalName;
-		this.userId = userId;
+
 		this.createdAt = createdAt;
 
 	}
@@ -65,9 +65,6 @@ public class FileUploadEntity implements Serializable {
 
 	@Column(name = "original_name")
 	private String originalName;
-
-	@Column(name = "user_id")
-	private Long userId;
 
 	@Column(name = "created_at")
 	@CreationTimestamp
@@ -130,18 +127,6 @@ public class FileUploadEntity implements Serializable {
 	public void setOriginalName(String originalName) {
 
 		this.originalName = originalName;
-
-	}
-
-	public Long getUserId() {
-
-		return userId;
-
-	}
-
-	public void setUserId(Long userId) {
-
-		this.userId = userId;
 
 	}
 

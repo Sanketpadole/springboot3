@@ -85,7 +85,7 @@ public class ApiLogger implements HandlerInterceptor {
 			apiDetail.setMethod(request.getMethod());
 			apiDetail.setHost(request.getRemoteHost());
 			System.out.println("vj");
-			apiDetail.setBody(request instanceof StandardMultipartHttpServletRequest ? null : request.getReader().lines().collect(Collectors.joining(System.lineSeparator())));
+			//apiDetail.setBody(request instanceof StandardMultipartHttpServletRequest ? null : request.getReader().lines().collect(Collectors.joining(System.lineSeparator())));
 			System.out.println("j"+request);
 			apiLoggerSerivceInterface.createApiLog(apiDetail);
 			return true;
