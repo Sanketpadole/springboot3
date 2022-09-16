@@ -13,13 +13,11 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.example.springboot2.Dto.SuccessResponseDto;
 import com.example.springboot2.Entities.FileUploadEntity;
 import com.example.springboot2.Exception.FileStorageException;
 import com.example.springboot2.Exception.MyFileNotFoundException;
@@ -57,9 +55,9 @@ public class FileStorageServiceImpl implements FileStorageServiceInterface {
 	public FileUploadEntity storeFile(MultipartFile file, String type, HttpServletRequest request) throws IOException {
 
 		// Normalize file name
-		String fileName = StringUtils.cleanPath(file.getName());
+		String fileName = StringUtils.cleanPath(file.getOriginalFilename());
 //		String fileName=StringUtils.endsWithIgnoreCase(file.getName(), "pdf");
-		
+
 		System.out.println("filename" + fileName);
 
 		try {
@@ -70,67 +68,50 @@ public class FileStorageServiceImpl implements FileStorageServiceInterface {
 				throw new FileStorageException("Sorry! Filename contains invalid path sequence " + fileName);
 
 			}
-			
-////			if(StringUtils.endsWithIgnoreCase(fileName, "pdf")) {
-////				throw new FileStorageException("Sorry! Filename contains invalid path sequence " + fileName);
-////			}
-//			
-			
-			if(type.equals("pdf")) {
-				System.out.println("ghwgyf");
-			
-////			throw new FileStorageException("Sorry! Filename contains invalid path sequence " + fileName);
-////		}
-//		
-			try {
 
-			File pathAsFile = new File(this.fileStorageLocation + "/" + type);
+//			if (fileName.endsWith("pdf")) {
+//
+//				System.out.println("File Found");
+//
+//				try {
 
-			if (!Files.exists(Paths.get(this.fileStorageLocation + "/" + type))) {
+					File pathAsFile = new File(this.fileStorageLocation + "/" + type);
 
-				pathAsFile.mkdir();
+					if (!Files.exists(Paths.get(this.fileStorageLocation + "/" + type))) {
 
-			}
+						pathAsFile.mkdir();
 
-			// Copy file to the target location (Replacing existing file with the same name)
-			Path targetLocation = this.fileStorageLocation.resolve(type + "/" + fileName);
-			Files.copy(file.getInputStream(), targetLocation, StandardCopyOption.REPLACE_EXISTING);
-			FileUploadEntity newFile = new FileUploadEntity();
-			newFile.setEncoding(request.getCharacterEncoding());
-			newFile.setType(type);
-			newFile.setFilename(fileName);
-			newFile.setMimetype(file.getContentType());
-			newFile.setOriginalName(fileName);
-			newFile.setSize(file.getSize());
+					}
 
-			FileUploadEntity fileDetail = this.fileUploadRepository.save(newFile);
+					// Copy file to the target location (Replacing existing file with the same name)
+					Path targetLocation = this.fileStorageLocation.resolve(type + "/" + fileName);
+					Files.copy(file.getInputStream(), targetLocation, StandardCopyOption.REPLACE_EXISTING);
+					FileUploadEntity newFile = new FileUploadEntity();
+					newFile.setEncoding(request.getCharacterEncoding());
+					newFile.setType(type);
+					newFile.setFilename(fileName);
+					newFile.setMimetype(file.getContentType());
+					newFile.setOriginalName(fileName);
+					newFile.setSize(file.getSize());
 
-			return fileDetail;
-			}
-			
-			catch(IOException ex) {
-				throw new FileStorageException("Could not store file " + fileName + ". Please try again!", ex);
-			}
-			
-			}else
-			{
-				throw new FileStorageException("Pdf Not Found file " + fileName );
-			}
-			}
-			
-			catch(Exception ex) {
-				throw new FileStorageException("Could not store file " + fileName + ". Please try again!", ex);
-		
-			}
-		
+					FileUploadEntity fileDetail = this.fileUploadRepository.save(newFile);
 
-			
-			
-		
-		
-		
-	
-		
+					return fileDetail;
+				}
+
+				catch (IOException ex) {
+					throw new FileStorageException("Could not store file " + fileName + ". Please try again!", ex);
+				}
+
+//			} else {
+//				throw new FileStorageException("Pdf Not Found file " + fileName);
+//			}
+//		}
+
+		catch (Exception ex) {
+			throw new FileStorageException("Could not store file " + fileName + ". Please try again!", ex);
+
+		}
 
 	}
 
@@ -150,8 +131,6 @@ public class FileStorageServiceImpl implements FileStorageServiceInterface {
 		}
 
 	}
-
-
 
 	@Override
 	public String getFolderName(String type) throws ResourceNotFoundException {
