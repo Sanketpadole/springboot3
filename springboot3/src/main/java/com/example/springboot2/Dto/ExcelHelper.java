@@ -13,132 +13,124 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-//import org.apache.poi.ss.usermodel.Cell;
-//import org.apache.poi.ss.usermodel.Row;
-//import org.apache.poi.ss.usermodel.Sheet;
-//import org.apache.poi.ss.usermodel.Workbook;
-//import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+
 import org.springframework.web.multipart.MultipartFile;
 
-import com.example.springboot2.Entities.Tutorial;
-
-//import com.bezkoder.spring.files.excel.model.Tutorial;
+import com.example.springboot2.Entities.Excel;
 
 public class ExcelHelper {
-  public static String TYPE = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
-  static String[] HEADERs = { "Id", "Title", "Description", "Published" };
-  static String SHEET = "Sheet1";
-	 
+	public static String TYPE = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
+	static String[] HEADERs = { "Id", "Title", "Description", "Role" };
+	static String SHEET = "Sheet1";
 
-  public static boolean hasExcelFormat(MultipartFile file) {
-	  System.out.println("GJD");
+	public static boolean hasExcelFormat(MultipartFile file) {
 
-    if (!TYPE.equals(file.getContentType())) {
-//	  if(!TYPE.equals("xlsx")) {
-		  System.out.println("gf"+TYPE);
-      return false;
-    }
+		if (!TYPE.equals(file.getContentType())) {
 
-    return true;
-  }
+			return false;
+		}
 
-  public static ByteArrayInputStream tutorialsToExcel(List<Tutorial> tutorials) {
+		return true;
+	}
 
-    try (Workbook workbook = new XSSFWorkbook(); ByteArrayOutputStream out = new ByteArrayOutputStream();) {
-      Sheet sheet = workbook.createSheet(SHEET);
-      System.out.println("jhef");
-      // Header
-      Row headerRow = sheet.createRow(0);
+	public static ByteArrayInputStream tutorialsToExcel(List<Excel> tutorials) {
 
-      for (int col = 0; col < HEADERs.length; col++) {
-        Cell cell = headerRow.createCell(col);
-        cell.setCellValue(HEADERs[col]);
-      }
+		try (Workbook workbook = new XSSFWorkbook(); ByteArrayOutputStream out = new ByteArrayOutputStream();) {
+			Sheet sheet = workbook.createSheet(SHEET);
 
-      int rowIdx = 1;
-      for (Tutorial tutorial : tutorials) {
-        Row row = sheet.createRow(rowIdx++);
+			// Header
+			Row headerRow = sheet.createRow(0);
 
-        row.createCell(0).setCellValue(tutorial.getId());
-        row.createCell(1).setCellValue(tutorial.getTitle());
-        row.createCell(2).setCellValue(tutorial.getDescription());
-        row.createCell(3).setCellValue(tutorial.getRole());
-      }
-      System.out.println("sasfj");
-      workbook.write(out);
-      return new ByteArrayInputStream(out.toByteArray());
-    } catch (IOException e) {
-      throw new RuntimeException("fail to import data to Excel file: " + e.getMessage());
-    }
-  }
+			for (int col = 0; col < HEADERs.length; col++) {
+				Cell cell = headerRow.createCell(col);
+				cell.setCellValue(HEADERs[col]);
+			}
 
-  public static List<Tutorial> excelToTutorials(InputStream is) {
-	  System.out.println("jggj"+is);
-    try {
-    	System.out.println("gyl");
-//      Workbook workbook = new XSSFWorkbook(is);
-    	Workbook workbook=new XSSFWorkbook(is);
-      System.out.println("jgh"+workbook);
-      Sheet sheet = workbook.getSheet(SHEET);
-      Iterator<Row> rows = sheet.iterator();
-      System.out.println("hj"+sheet);
-      List<Tutorial> tutorials = new ArrayList<Tutorial>();
+			int rowIdx = 1;
+			for (Excel tutorial : tutorials) {
+				Row row = sheet.createRow(rowIdx++);
 
-      int rowNumber = 0;
-      while (rows.hasNext()) {
-        Row currentRow = rows.next();
+				row.createCell(0).setCellValue(tutorial.getId());
+				row.createCell(1).setCellValue(tutorial.getTitle());
+				row.createCell(2).setCellValue(tutorial.getDescription());
+				row.createCell(3).setCellValue(tutorial.getRole());
+			}
 
-        // skip header
-        if (rowNumber == 0) {
-          rowNumber++;
-          continue;
-        }
-        System.out.println("ghq");
-        Iterator<Cell> cellsInRow = currentRow.iterator();
+			workbook.write(out);
+			return new ByteArrayInputStream(out.toByteArray());
+		} catch (IOException e) {
+			throw new RuntimeException("fail to import data to Excel file: " + e.getMessage());
+		}
+	}
 
-        Tutorial tutorial = new Tutorial();
+	public static List<Excel> excelToTutorials(InputStream is) {
 
-        int cellIdx = 0;
-        while (cellsInRow.hasNext()) {
-          Cell currentCell = cellsInRow.next();
-          System.out.println("wqhj");
-          switch (cellIdx) {
-         
-          case 1:
-            tutorial.setId((long) currentCell.getNumericCellValue());
-            break;
+		try {
 
-          case 2:
-            tutorial.setTitle(currentCell.getStringCellValue());
-            break;
-            
+			Workbook workbook = new XSSFWorkbook(is);
 
-          case 3:
-            tutorial.setDescription(currentCell.getStringCellValue());
-            break;
+			Sheet sheet = workbook.getSheet(SHEET);
+			Iterator<Row> rows = sheet.iterator();
 
-          case 4:
-            tutorial.setRole(currentCell.getStringCellValue());
-            break;
+			List<Excel> tutorials = new ArrayList<Excel>();
 
-          default:
-            break;
-          }
-          System.out.println("efj");
+			int rowNumber = 0;
+			while (rows.hasNext()) {
+				Row currentRow = rows.next();
 
-          cellIdx++;
-        }
-        System.out.println("kjk");
-        tutorials.add(tutorial);
-        System.out.println("gkkglk"+tutorials);
-      }
+				// skip header
+				if (rowNumber == 0) {
+					rowNumber++;
+					continue;
+				}
 
-      workbook.close();
+				Iterator<Cell> cellsInRow = currentRow.iterator();
 
-      return tutorials;
-      
-    } catch (IOException e) {
-      throw new RuntimeException("fail to parse Excel file: " + e.getMessage());
-    }
-  }
+				Excel tutorial = new Excel();
+
+				int cellIdx = 0;
+
+				while (cellsInRow.hasNext()) {
+
+					Cell currentCell = cellsInRow.next();
+
+					switch (cellIdx) {
+
+					case 0:
+						tutorial.setId((long) currentCell.getNumericCellValue());
+
+						break;
+
+					case 1:
+						tutorial.setTitle(currentCell.getStringCellValue());
+
+						break;
+
+					case 2:
+						tutorial.setDescription(currentCell.getStringCellValue());
+						break;
+
+					case 3:
+						tutorial.setRole(currentCell.getStringCellValue());
+						break;
+
+					default:
+						break;
+					}
+
+					cellIdx++;
+				}
+
+				tutorials.add(tutorial);
+
+			}
+
+			workbook.close();
+
+			return tutorials;
+
+		} catch (IOException e) {
+			throw new RuntimeException("fail to parse Excel file: " + e.getMessage());
+		}
+	}
 }
