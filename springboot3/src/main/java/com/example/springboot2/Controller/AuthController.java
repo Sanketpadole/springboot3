@@ -82,12 +82,12 @@ public class AuthController {
 
 			System.out.println("Email" + authenticationRequest.getEmail());
 			Users users = userRepo.findByEmail(authenticationRequest.getEmail());
-			System.out.println("user"+users);
+			System.out.println("user" + users);
 
 			if (this.authServiceInterface.comparePassword(authenticationRequest.getPassword(), users.getPassword())) {
-				System.out.println("token1");
+				System.out.println("afy");
 				String token = this.jwtTokenHelper.generateToken(users);
-				System.out.println("token"+token);
+				System.out.println("token" + token);
 
 				LoggerDto dto = new LoggerDto();
 				dto.setToken(token);

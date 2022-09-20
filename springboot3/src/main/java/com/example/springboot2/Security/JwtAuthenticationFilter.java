@@ -16,6 +16,7 @@ import org.springframework.security.web.authentication.WebAuthenticationDetailsS
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
+import com.example.springboot2.Config.MultiReadHttpServletRequest;
 import com.example.springboot2.Service.AuthServiceImpl;
 
 import io.jsonwebtoken.ExpiredJwtException;
@@ -37,11 +38,11 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
 //		Bearer 476987njik
 
-		System.out.println("requestToken"+requestToken);
-
+		System.out.println("requestToken" + requestToken);
+		MultiReadHttpServletRequest multiReadRequest = new MultiReadHttpServletRequest(request);
 		String username = null;
 		String token = null;
-		
+
 		if (request != null && requestToken.startsWith("Bearer ")) {
 			token = requestToken.substring(7);
 			try {
@@ -64,7 +65,6 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
 			UserDetails userDetails = this.customUserDetailService.loadUserByUsername(username);
 
-
 			if (this.jwtTokenHelper.validateToken(token, userDetails)) {
 //				Authentication
 
@@ -80,10 +80,8 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 			System.out.println("username is null or context is not null");
 		}
 
+		filterChain.doFilter(multiReadRequest, response);
 		filterChain.doFilter(request, response);
-		{
-
-		}
 
 	}
 

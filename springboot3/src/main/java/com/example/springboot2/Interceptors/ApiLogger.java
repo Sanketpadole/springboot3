@@ -3,13 +3,14 @@ package com.example.springboot2.Interceptors;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
+import java.util.stream.Collectors;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
+import org.springframework.web.multipart.support.StandardMultipartHttpServletRequest;
 import org.springframework.web.servlet.HandlerInterceptor;
 
 import com.example.springboot2.Dto.ErrorResponseDto;
@@ -37,63 +38,65 @@ public class ApiLogger implements HandlerInterceptor {
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
-				
 
-//		ArrayList<String> skipUrls = new ArrayList<>(Arrays.asList("/api/v1/auth/login", "/api/v1/auth/register","/v3/api-docs", "/v2/api-docs", "/swagger-resources/**",
-//				"/swagger-ui/", "/webjars/","/api/swagger-ui/index.html"));
-//		final String arr = request.getRequestURI();
-//
-//		final String gettoken = request.getHeader("Authorization");
-//		System.out.println("tok" + gettoken);
-//		if (!skipUrls.contains(arr)) {
-//			final String requestheader = (null != gettoken) ? gettoken.split(" ")[1] : null;
-//			LoggerEntity logsDetail = loggerServiceInterface.getLoggerDetail(requestheader);
-//			if (logsDetail == null) {
-//
-//				ErrorResponseDto error = new ErrorResponseDto("You are not login User", "notLoginUser", new Date());
-//				String employeeJsonString = this.gson.toJson(error);
-//				response.setContentType("application/json");
-//				response.setCharacterEncoding("UTF-8");
-//				System.out.println("not2");
-//				response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-//				response.getWriter().write(employeeJsonString);
-//				System.out.println("jj");
-//				return false;
-//
-//			} else
-//
-//			{
-//				ApiLoggerEntity apiDetail = new ApiLoggerEntity();
-//				System.out.println("hh");
-//				apiDetail.setUserToken(gettoken);
-//				System.out.println("not" + apiDetail);
-//				apiDetail.setIpAddress(request.getRemoteAddr());
-//				apiDetail.setUrl(request.getRequestURI());
-//				apiDetail.setMethod(request.getMethod());
-//				apiDetail.setHost(request.getRemoteHost());
-////				apiDetail.setBody(request instanceof StandardMultipartHttpServletRequest ? null : request.getReader().lines().collect(Collectors.joining(System.lineSeparator())));
-//				apiLoggerSerivceInterface.createApiLog(apiDetail);
-//				return true;
-//
-//			}
-//
-//		} else {
+		ArrayList<String> skipUrls = new ArrayList<>(
+				Arrays.asList("/api/v1/auth/login", "/api/v1/auth/register", "/v3/api-docs", "/v2/api-docs",
+						"/swagger-resources/**", "/swagger-ui/", "/webjars/", "/api/swagger-ui/index.html"));
+
+		final String arr = request.getRequestURI();
+
+		final String gettoken = request.getHeader("Authorization");
+
+		System.out.println("tok" + gettoken);
+		if (!skipUrls.contains(arr)) {
+			final String requestheader = (null != gettoken) ? gettoken.split(" ")[1] : null;
+
+			LoggerEntity logsDetail = loggerServiceInterface.getLoggerDetail(requestheader);
+			if (logsDetail == null) {
+
+				ErrorResponseDto error = new ErrorResponseDto("You are not login User", "notLoginUser", new Date());
+				String employeeJsonString = this.gson.toJson(error);
+				response.setContentType("application/json");
+				response.setCharacterEncoding("UTF-8");
+
+				response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+				response.getWriter().write(employeeJsonString);
+
+				return false;
+
+			} else
+
+			{
+				ApiLoggerEntity apiDetail = new ApiLoggerEntity();
+
+				apiDetail.setUserToken(gettoken);
+				System.out.println("not" + apiDetail);
+				apiDetail.setIpAddress(request.getRemoteAddr());
+				apiDetail.setUrl(request.getRequestURI());
+				apiDetail.setMethod(request.getMethod());
+				apiDetail.setHost(request.getRemoteHost());
+				//apiDetail.setBody(request instanceof StandardMultipartHttpServletRequest ? null : request.getReader().lines().collect(Collectors.joining(System.lineSeparator())));
+				apiLoggerSerivceInterface.createApiLog(apiDetail);
+				return true;
+
+			}
+
+		} else {
 			ApiLoggerEntity apiDetail = new ApiLoggerEntity();
-//			apiDetail.setUserToken(gettoken);
+			apiDetail.setUserToken(" ");
 			apiDetail.setIpAddress(request.getRemoteAddr());
 			apiDetail.setUrl(request.getRequestURI());
 			apiDetail.setMethod(request.getMethod());
 			apiDetail.setHost(request.getRemoteHost());
-			System.out.println("vj");
-			// apiDetail.setBody(request instanceof StandardMultipartHttpServletRequest ?
-			// null :
-//			 request.getReader().lines().collect(Collectors.joining(System.lineSeparator())));
-			System.out.println("j" + request);
+
+			 apiDetail.setBody(request instanceof StandardMultipartHttpServletRequest ?
+			 null :
+			 request.getReader().lines().collect(Collectors.joining(System.lineSeparator())));
+
 			apiLoggerSerivceInterface.createApiLog(apiDetail);
 			return true;
 
 		}
 
 	}
-
-
+}
